@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameCore.DungeonEntities
+namespace GameCore.DungeonEntities.Monsters
 {
     public interface IMonster
     {
