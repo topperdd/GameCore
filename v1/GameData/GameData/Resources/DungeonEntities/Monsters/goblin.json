@@ -1,0 +1,5 @@
+﻿{
+  "EntityType": "Monster",
+  "MonsterType": "Goblin",
+  "MaxHealth": 1
+}

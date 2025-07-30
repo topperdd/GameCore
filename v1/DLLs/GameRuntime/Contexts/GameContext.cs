@@ -1,0 +1,17 @@
+﻿using GameRuntime.Managers;
+
+namespace GameRuntime.Contexts
+{
+    public class GameContext
+    {
+        public EventManager EventManager { get; private set; }
+        public PartymemberManager PartymemberManager { get; private set; } 
+
+        public GameContext()
+        {
+            EventManager = new EventManager();
+            PartymemberManager = new PartymemberManager(this);
+        }
+    }
+}
+

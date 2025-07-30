@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\DLLs\GameCore\GameCore.csproj" />
+    <ProjectReference Include="..\..\DLLs\GameRuntime\GameRuntime.csproj" />
+    <ProjectReference Include="..\..\DLLs\GameSystems\GameSystems.csproj" />
+    <ProjectReference Include="..\..\GameData\GameData\GameData.csproj" />
+  </ItemGroup>
+
+</Project>
