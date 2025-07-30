@@ -6,4 +6,5 @@
 - [x] Implement TargetSelectionManager
 - [x] Implement MonsterHealth (erstmal Leben abziehen und checken ob tot)
 - [x] Implement PartymemberManager für erstelle Partymember
-- [ ] Implement DungeonManager für erstelle Monster
+- [x] Implement DungeonManager für erstelle Monster
+- [ ] Attacke implementieren

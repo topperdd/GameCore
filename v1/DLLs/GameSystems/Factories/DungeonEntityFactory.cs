@@ -1,5 +1,7 @@
 ﻿using GameCore.DungeonEntities.Monsters;
 using GameCore.Partymember;
+using GameRuntime.Contexts;
+using GameRuntime.Events.Creation;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -8,17 +10,20 @@ namespace GameSystems.Factories
     public class DungeonEntityFactory
     {
         private List<MonsterData> _monsterDataList = new List<MonsterData>();
-
-        public DungeonEntityFactory()
+        private GameContext _gameContext;
+        public DungeonEntityFactory(GameContext gameContext)
         {
             _monsterDataList = LoadMonsterResources();
+            _gameContext = gameContext ?? throw new ArgumentNullException(nameof(gameContext));
         }
 
-        public MonsterInstance CreateMonsterInstance(MonsterType monsterType)
+        public void CreateMonsterInstance(MonsterType monsterType)
         {
             var monsterDataToGenerate = _monsterDataList.Where(q => q.MonsterType == monsterType).FirstOrDefault();
 
-            return new MonsterInstance(monsterDataToGenerate);
+            var monsterInstance = new MonsterInstance(monsterDataToGenerate);
+            
+            _gameContext.EventManager.Publish(new MonsterCreatedEvent(monsterInstance));
         }
 
         private List<MonsterData> LoadMonsterResources()

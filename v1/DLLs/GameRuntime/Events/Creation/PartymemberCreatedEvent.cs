@@ -1,6 +1,6 @@
 ﻿using GameCore.Partymember;
 
-namespace GameRuntime.Events
+namespace GameRuntime.Events.Creation
 {
     public class PartymemberCreatedEvent
     {
