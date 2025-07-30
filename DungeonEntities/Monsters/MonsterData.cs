@@ -9,11 +9,8 @@ namespace GameCore.DungeonEntities.Monsters
     public class MonsterData : IDungeonEntity, IMonster
     {
         public DungeonEntityType EntityType { get; set; }
-        public MonsterType MonsterType { get; set; } 
-        public MonsterData(DungeonEntityType entityType)
-        {
-            EntityType = entityType;
-        }
+        public MonsterType MonsterType { get; set; }
+        public int MaxHealth { get; set; }
     }
 }
 

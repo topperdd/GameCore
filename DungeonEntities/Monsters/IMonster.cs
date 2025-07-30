@@ -9,6 +9,7 @@ namespace GameCore.DungeonEntities.Monsters
     public interface IMonster
     {
         public MonsterType MonsterType { get; set; }
+        public int MaxHealth { get; set; }
     }
 }
 
