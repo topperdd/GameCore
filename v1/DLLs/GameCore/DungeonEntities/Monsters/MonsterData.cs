@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameCore.DungeonEntities.Monsters
 {
-    public class MonsterData : IDungeonEntity, IMonster
+    public class MonsterData
     {
         public DungeonEntityType EntityType { get; set; }
         public MonsterType MonsterType { get; set; }
@@ -15,3 +15,14 @@ namespace GameCore.DungeonEntities.Monsters
 }
 
 
+public enum MonsterType
+{
+    Goblin
+}
+
+public enum DungeonEntityType
+{
+    Monster
+    //Loot,
+    //Dragon
+}

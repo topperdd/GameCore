@@ -1,7 +1,12 @@
 ﻿namespace GameCore.Partymember
 {
-    public class PartymemberData : IPartymember
+    public class PartymemberData
     {
         public PartymemberClass Class { get; set; }
     }
+}
+public enum PartymemberClass
+{
+    Warrior,
+    Mage
 }
