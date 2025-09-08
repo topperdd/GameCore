@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GameCore.Abilities.AttackAbility;
+using GameCore.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +16,5 @@ namespace GameCore.Partymember
         {
             Data = data;
         }
-
     }
 }

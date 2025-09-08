@@ -7,6 +7,7 @@ namespace GameRuntime.Contexts
         public EventManager EventManager { get; private set; }
         public PartymemberManager PartymemberManager { get; private set; } 
         public DungeonManager DungeonManager { get; private set; }
+        
 
         public GameContext()
         {

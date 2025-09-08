@@ -1,4 +1,6 @@
-﻿using GameCore.Partymember;
+﻿using GameCore.Abilities.AttackAbility;
+using GameCore.Abilities.AttackAbility.AttackEffects;
+using GameCore.Partymember;
 using GameRuntime.Contexts;
 using GameRuntime.Events.Creation;
 using System.Text.Json;
@@ -20,6 +22,18 @@ namespace GameSystems.Factories
         public void CreatePartymemberInstance(PartymemberClass partymemberClass)
         {
             var partymemberData = _partymemberDataList.FirstOrDefault(p => p.Class == partymemberClass);
+
+            var attackAbility = new AttackAbilityData
+            {
+                AbilityName = "Basic Attack",
+                AttackEffects = new List<IAttackEffect>
+                {
+                    new DamageEffect()
+                }
+            };
+
+            partymemberData.AttackAbility = new AttackAbilityInstance(attackAbility);
+
             if (partymemberData == null)
             {
                 throw new ArgumentException($"Partymember with name '{partymemberClass}' not found.");

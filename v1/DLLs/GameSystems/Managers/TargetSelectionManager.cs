@@ -2,6 +2,7 @@
 using GameCore.Partymember;
 using GameRuntime.Contexts;
 using GameRuntime.Events;
+using GameRuntime.Events.Combat;
 
 namespace GameSystems.Managers
 {
@@ -29,7 +30,11 @@ namespace GameSystems.Managers
             if (PartymemberInstance != null)
             {
                 Console.WriteLine($"PartymemberInstance: {PartymemberInstance.Data.Class.ToString()} is targeting MonsterInstance: {MonsterInstance.Data.EntityType.ToString()}");
-                Console.WriteLine($"Start Combat");
+
+                var combatContext = new CombatContext(PartymemberInstance, MonsterInstance);
+
+                _gameContext.EventManager.Publish(new CombatStartedEvent(combatContext));
+
                 Console.WriteLine("");
                 return;
             }

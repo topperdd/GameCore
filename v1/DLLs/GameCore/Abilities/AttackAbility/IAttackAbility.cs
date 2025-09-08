@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameCore.Abilities
+namespace GameCore.Abilities.AttackAbility
 {
     public interface IAttackAbility
     {

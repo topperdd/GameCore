@@ -6,6 +6,7 @@ using GameSystems.Managers;
 
 var gameContext = new GameContext();
 var targetSelectionManager = new TargetSelectionManager(gameContext);
+var combatResolveManager = new CombatResolveManager(gameContext);
 
 var partymemberFactory = new PartymemberFactory(gameContext);
 partymemberFactory.CreatePartymemberInstance(PartymemberClass.Warrior);
@@ -26,7 +27,3 @@ Console.WriteLine("");
 
 gameContext.EventManager.Publish(new PartyMemberInstanceSelectedEvent(gameContext.PartymemberManager.PartymemberInstances[0]));
 gameContext.EventManager.Publish(new MonsterInstanceSelectedEvent(gameContext.DungeonManager.MonsterInstances[0]));
-
-gameContext.DungeonManager.MonsterInstances[0].TakeDamage(10);
-Console.WriteLine($"Monster Type: {gameContext.DungeonManager.MonsterInstances[0].Data.MonsterType}, CurrentLife: {gameContext.DungeonManager.MonsterInstances[0].CurrentHealth}");
-Console.WriteLine("");

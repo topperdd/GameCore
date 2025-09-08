@@ -1,6 +1,6 @@
 ﻿using GameCore.Interfaces;
 
-namespace GameCore.Abilities
+namespace GameCore.Abilities.AttackAbility
 {
     public class AttackAbilityInstance : IAttackAbility
     {
@@ -14,6 +14,11 @@ namespace GameCore.Abilities
         public void ExecuteAttack(IDamageable target)
         {
             Console.WriteLine($"Executing attack with ability: {Data.AbilityName}");
+
+            foreach (var effect in Data.AttackEffects)
+            {
+                effect.ApplyEffect(target);
+            }
         }
     }
 }
