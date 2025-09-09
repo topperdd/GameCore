@@ -24,9 +24,10 @@ namespace GameSystems.Managers
 
         private void ResolveCombat()
         {
-            _combatContext.PartymemberInstance.Data.AttackAbility.ExecuteAttack(_combatContext.MonsterInstance);
-            Console.WriteLine($"Monster Type: {_combatContext.MonsterInstance.Data.MonsterType}, CurrentLife: {_combatContext.MonsterInstance.CurrentHealth}");
-            Console.WriteLine("");   
+            foreach (var attackAbility in _combatContext.PartymemberInstance.AttackAbilities)
+            {
+                attackAbility.ExecuteAttack(_combatContext.MonsterInstance);
+            } 
         }
     }
 }

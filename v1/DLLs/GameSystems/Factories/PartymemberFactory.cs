@@ -1,5 +1,4 @@
 ﻿using GameCore.Abilities.AttackAbility;
-using GameCore.Abilities.AttackAbility.AttackEffects;
 using GameCore.Partymember;
 using GameRuntime.Contexts;
 using GameRuntime.Events.Creation;
@@ -12,34 +11,28 @@ namespace GameSystems.Factories
     {
         private List<PartymemberData> _partymemberDataList = new List<PartymemberData>();
         private GameContext _gameContext;
+        private AbilityFactory _abilityFactory;
 
         public PartymemberFactory(GameContext gameContext)
         {
             _partymemberDataList = LoadPartymemberResources();
             _gameContext = gameContext;
+            _abilityFactory = new AbilityFactory(_gameContext);
         }
 
         public void CreatePartymemberInstance(PartymemberClass partymemberClass)
         {
             var partymemberData = _partymemberDataList.FirstOrDefault(p => p.Class == partymemberClass);
 
-            var attackAbility = new AttackAbilityData
-            {
-                AbilityName = "Basic Attack",
-                AttackEffects = new List<IAttackEffect>
-                {
-                    new DamageEffect()
-                }
-            };
+            var attackAbilities = new List<IAttackAbility>();
 
-            partymemberData.AttackAbility = new AttackAbilityInstance(attackAbility);
-
-            if (partymemberData == null)
+            foreach (var abilityId in partymemberData.AttackAbilityIds)
             {
-                throw new ArgumentException($"Partymember with name '{partymemberClass}' not found.");
+                var newAbility = _abilityFactory.CreateAbilityInstance(abilityId);
+                attackAbilities.Add(newAbility);
             }
-            
-            var partymemberInstance = new PartymemberInstance(partymemberData); 
+
+            var partymemberInstance = new PartymemberInstance(partymemberData, attackAbilities); 
 
             _gameContext.EventManager.Publish(new PartymemberCreatedEvent(partymemberInstance));
         }

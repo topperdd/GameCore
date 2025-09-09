@@ -6,7 +6,7 @@ namespace GameCore.Partymember
     {
         public PartymemberClass Class { get; set; }
 
-        public IAttackAbility AttackAbility { get; set; } = null!;
+        public List<string> AttackAbilityIds { get; set; } = new List<string>();
     }
 }
 public enum PartymemberClass

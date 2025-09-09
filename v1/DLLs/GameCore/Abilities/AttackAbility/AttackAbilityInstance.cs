@@ -13,12 +13,7 @@ namespace GameCore.Abilities.AttackAbility
 
         public void ExecuteAttack(IDamageable target)
         {
-            Console.WriteLine($"Executing attack with ability: {Data.AbilityName}");
-
-            foreach (var effect in Data.AttackEffects)
-            {
-                effect.ApplyEffect(target);
-            }
+            Console.WriteLine($"Executing attack with ability: {Data.AttackAbilityId}");
         }
     }
 }
