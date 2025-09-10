@@ -11,9 +11,9 @@ namespace GameCore.Partymember
     public class PartymemberInstance
     {
         public PartymemberData Data { get; set; }
-        public List<IAttackAbility> AttackAbilities { get; set; } = new List<IAttackAbility>();   
+        public List<IAbility> AttackAbilities { get; set; } = new List<IAbility>();   
 
-        public PartymemberInstance(PartymemberData data, List<IAttackAbility> attackAbilities)
+        public PartymemberInstance(PartymemberData data, List<IAbility> attackAbilities)
         {
             Data = data;
             AttackAbilities = attackAbilities;

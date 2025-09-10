@@ -1,19 +1,27 @@
-﻿using GameCore.Interfaces;
+﻿using GameCore.Abilities.Effects;
+using GameCore.Interfaces;
 
 namespace GameCore.Abilities.AttackAbility
 {
-    public class AttackAbilityInstance : IAttackAbility
+    public class AttackAbilityInstance : IAbility
     {
-        public AttackAbilityData Data { get; set; }
+        public AbilityData Data { get; set; }
+        public List<IEffect> Effects { get; set; }
 
-        public AttackAbilityInstance(AttackAbilityData data)
+        public AttackAbilityInstance(AbilityData data, List<IEffect> effectData)
         {
             Data = data;
+            Effects = effectData;
         }
 
-        public void ExecuteAttack(IDamageable target)
+        public void ExecuteAbility()
         {
-            Console.WriteLine($"Executing attack with ability: {Data.AttackAbilityId}");
+            Console.WriteLine($"Executing attack with ability: {Data.AbilityId}");
+
+            foreach (var effect in Effects)
+            {
+                effect.ApplyEffect();
+            }
         }
     }
 }

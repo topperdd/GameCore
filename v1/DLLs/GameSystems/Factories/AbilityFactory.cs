@@ -1,4 +1,6 @@
-﻿using GameCore.Abilities.AttackAbility;
+﻿using GameCore.Abilities;
+using GameCore.Abilities.AttackAbility;
+using GameCore.Abilities.Effects;
 using GameCore.Partymember;
 using GameRuntime.Contexts;
 using System;
@@ -14,23 +16,33 @@ namespace GameSystems.Factories
     public class AbilityFactory
     {
         private GameContext _gameContext;
-        private List<AttackAbilityData> _attackAbilityData = new List<AttackAbilityData>();
+        private List<AbilityData> _attackAbilityData = new List<AbilityData>();
+        private EffectFactory _effectFactory;
 
         public AbilityFactory(GameContext gameContext)
         {
             _gameContext = gameContext;
+            _effectFactory = new EffectFactory(_gameContext);   
             _attackAbilityData = LoadAttackAbilityResources();
         }
 
-        internal IAttackAbility CreateAbilityInstance(string abilityId)
+        internal IAbility CreateAttackAbilityInstance(string abilityId)
         {
-            var abilityData = _attackAbilityData.FirstOrDefault(a => a.AttackAbilityId == abilityId);
-            return new AttackAbilityInstance(abilityData);
+            var abilityData = _attackAbilityData.FirstOrDefault(a => a.AbilityId == abilityId);
+
+            var effects = new List<IEffect>();
+            foreach (var effectId in abilityData.EffectIds)
+            {
+                var newEffect = _effectFactory.CreateEffectInstance(effectId);
+                effects.Add(newEffect);
+            }
+
+            return new AttackAbilityInstance(abilityData, effects);
         }
 
-        private List<AttackAbilityData> LoadAttackAbilityResources()
+        private List<AbilityData> LoadAttackAbilityResources()
         {
-            var result = new List<AttackAbilityData>();
+            var result = new List<AbilityData>();
 
             string path = Path.Combine("Resources", "Abilities", "AttackAbilities");
 
@@ -46,7 +58,7 @@ namespace GameSystems.Factories
             {
                 string json = File.ReadAllText(attackAbility);
 
-                AttackAbilityData attackAbilityData = JsonSerializer.Deserialize<AttackAbilityData>(json, options);
+                AbilityData attackAbilityData = JsonSerializer.Deserialize<AbilityData>(json, options);
 
                 result.Add(attackAbilityData);
             }

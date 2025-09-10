@@ -24,11 +24,11 @@ namespace GameSystems.Factories
         {
             var partymemberData = _partymemberDataList.FirstOrDefault(p => p.Class == partymemberClass);
 
-            var attackAbilities = new List<IAttackAbility>();
+            var attackAbilities = new List<IAbility>();
 
             foreach (var abilityId in partymemberData.AttackAbilityIds)
             {
-                var newAbility = _abilityFactory.CreateAbilityInstance(abilityId);
+                var newAbility = _abilityFactory.CreateAttackAbilityInstance(abilityId);
                 attackAbilities.Add(newAbility);
             }
 

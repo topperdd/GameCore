@@ -1,0 +1,5 @@
+﻿{
+  "EffectId": "DamageEffect",
+  "Type" : "Damage",
+  "Value" : 1
+}

@@ -26,7 +26,7 @@ namespace GameSystems.Managers
         {
             foreach (var attackAbility in _combatContext.PartymemberInstance.AttackAbilities)
             {
-                attackAbility.ExecuteAttack(_combatContext.MonsterInstance);
+                attackAbility.ExecuteAbility();
             } 
         }
     }

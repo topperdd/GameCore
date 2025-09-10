@@ -1,7 +1,6 @@
 ﻿{
-  "AttackAbilityId": "BasicAttack",
-  "AttackEffects": [
-    "DamageEffect",
-    "BuffEffect"
+  "AbilityId": "BasicAttack",
+  "EffectIds": [
+    "DamageEffect"
   ]
 }

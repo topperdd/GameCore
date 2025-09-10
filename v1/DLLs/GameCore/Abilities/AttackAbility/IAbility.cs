@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace GameCore.Abilities.AttackAbility
 {
-    public interface IAttackAbility
+    public interface IAbility
     {
-        public void ExecuteAttack(IDamageable target);
+        public void ExecuteAbility();
     }
 }
