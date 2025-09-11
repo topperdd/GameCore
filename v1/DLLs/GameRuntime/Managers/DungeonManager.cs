@@ -1,5 +1,6 @@
 ﻿using GameCore.DungeonEntities.Monsters;
 using GameRuntime.Contexts;
+using GameRuntime.Events.Combat;
 using GameRuntime.Events.Creation;
 
 namespace GameRuntime.Managers
@@ -13,7 +14,14 @@ namespace GameRuntime.Managers
         public DungeonManager(GameContext gameContext)
         {
             _gameContext = gameContext ?? throw new ArgumentNullException(nameof(gameContext));
+
             _gameContext.EventManager.Subscribe<MonsterCreatedEvent>(OnMonsterCreated);
+            _gameContext.EventManager.Subscribe<MonsterDiedEvent>(OnMonsterDied);
+        }
+
+        private void OnMonsterDied(MonsterDiedEvent e)
+        {
+            MonsterInstances.Remove(e.MonsterInstance);
         }
 
         private void OnMonsterCreated(MonsterCreatedEvent e)

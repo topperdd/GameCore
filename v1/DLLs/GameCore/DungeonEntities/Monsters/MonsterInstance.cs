@@ -17,11 +17,13 @@ namespace GameCore.DungeonEntities.Monsters
         {
             CurrentHealth -= damageAmount;
 
-            if (CurrentHealth < 0)
+            if (CurrentHealth <= 0)
             {
                 CurrentHealth = 0;
                 Console.WriteLine($"Monster of type {Data.MonsterType} has been defeated.");
                 Console.WriteLine("");
+
+
             }
         }
     }

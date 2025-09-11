@@ -1,0 +1,6 @@
+﻿{
+  "AbilityId": "AttackMonster",
+  "EffectIds": [
+    "KillOneMonsterTypeEffect"
+  ]
+}

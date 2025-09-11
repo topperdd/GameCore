@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameRuntime.Contexts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,9 +14,13 @@ namespace GameCore.Abilities.Effects
         {
             EffectData = effectData;
         }
-        public void ApplyEffect()
+
+        public void ApplyEffect(EffectContext effectContext)
         {
-            Console.WriteLine($"Effect: {EffectData.EffectId} was used!");
+            foreach (var monster in effectContext.Targets)
+            {
+                monster.TakeDamage(EffectData.Value);
+            }
         }
     }
 }

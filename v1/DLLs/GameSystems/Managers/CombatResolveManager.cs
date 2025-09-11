@@ -1,4 +1,6 @@
-﻿using GameRuntime.Contexts;
+﻿using GameCore.DungeonEntities.Monsters;
+using GameCore.Interfaces;
+using GameRuntime.Contexts;
 using GameRuntime.Events;
 using GameRuntime.Events.Combat;
 
@@ -24,10 +26,21 @@ namespace GameSystems.Managers
 
         private void ResolveCombat()
         {
+            var effectContext = new EffectContext();
+
+            effectContext.Targets = _combatContext.MonsterInstances;
+
             foreach (var attackAbility in _combatContext.PartymemberInstance.AttackAbilities)
             {
-                attackAbility.ExecuteAbility();
-            } 
+                attackAbility.ExecuteAbility(effectContext);
+            }
+
+            foreach (var target in effectContext.Targets)
+            {
+                var monster = target as MonsterInstance;
+
+                _gameContext.EventManager.Publish(new MonsterDiedEvent(monster));
+            }
         }
     }
 }

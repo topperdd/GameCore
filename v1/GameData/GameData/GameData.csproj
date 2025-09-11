@@ -11,10 +11,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Resources\Abilities\AttackAbilities\BasicAttack.json">
+    <Content Include="Resources\Abilities\AttackAbilities\AttackMonster.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Abilities\Effects\DamageEffect.json">
+    <Content Include="Resources\Abilities\Effects\KillOneMonsterTypeEffect.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\DungeonEntities\Monsters\Skeleton.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\DungeonEntities\Monsters\Goblin.json">

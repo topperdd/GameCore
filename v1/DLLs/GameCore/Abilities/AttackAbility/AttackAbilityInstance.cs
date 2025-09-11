@@ -1,5 +1,6 @@
 ﻿using GameCore.Abilities.Effects;
 using GameCore.Interfaces;
+using GameRuntime.Contexts;
 
 namespace GameCore.Abilities.AttackAbility
 {
@@ -14,13 +15,11 @@ namespace GameCore.Abilities.AttackAbility
             Effects = effectData;
         }
 
-        public void ExecuteAbility()
+        public void ExecuteAbility(EffectContext effectContext)
         {
-            Console.WriteLine($"Executing attack with ability: {Data.AbilityId}");
-
             foreach (var effect in Effects)
             {
-                effect.ApplyEffect();
+                effect.ApplyEffect(effectContext);
             }
         }
     }

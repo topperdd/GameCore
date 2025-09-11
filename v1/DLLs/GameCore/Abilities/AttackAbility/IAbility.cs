@@ -1,4 +1,5 @@
 ﻿using GameCore.Interfaces;
+using GameRuntime.Contexts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace GameCore.Abilities.AttackAbility
 {
     public interface IAbility
     {
-        public void ExecuteAbility();
+        public void ExecuteAbility(EffectContext effectContext);
     }
 }

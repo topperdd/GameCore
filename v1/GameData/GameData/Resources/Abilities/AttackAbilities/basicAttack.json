@@ -1,6 +1,0 @@
-﻿{
-  "AbilityId": "BasicAttack",
-  "EffectIds": [
-    "DamageEffect"
-  ]
-}

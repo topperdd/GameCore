@@ -1,4 +1,5 @@
 ﻿using GameCore.DungeonEntities.Monsters;
+using GameCore.Interfaces;
 using GameCore.Partymember;
 using GameRuntime.Contexts;
 using GameRuntime.Events;
@@ -9,7 +10,7 @@ namespace GameSystems.Managers
     public class TargetSelectionManager
     {
         public PartymemberInstance PartymemberInstance { get; private set; } = null!;
-        public MonsterInstance MonsterInstance { get; private set; } = null!;
+        public List<MonsterInstance> MonsterInstances { get; private set; } = new List<MonsterInstance>();
 
         private GameContext _gameContext;
 
@@ -23,21 +24,38 @@ namespace GameSystems.Managers
 
         private void OnMonsterInstanceSelected(MonsterInstanceSelectedEvent e)
         {
-            MonsterInstance = e.MonsterInstance;
-            Console.WriteLine($"MonsterInstance selected: {e.MonsterInstance.Data.EntityType.ToString()}");
-            Console.WriteLine("");
-
             if (PartymemberInstance != null)
             {
-                Console.WriteLine($"PartymemberInstance: {PartymemberInstance.Data.Class.ToString()} is targeting MonsterInstance: {MonsterInstance.Data.EntityType.ToString()}");
+                var monsterType = e.MonsterInstance.Data.MonsterType;
 
-                var combatContext = new CombatContext(PartymemberInstance, MonsterInstance);
+                MonsterInstances = GetAllMonstersOfTheSameType(monsterType);
+
+                Console.WriteLine($"PartymemberInstance: {PartymemberInstance.Data.Class.ToString()} is targeting MonsterType: {monsterType}");
+
+                var combatContext = new CombatContext(PartymemberInstance, MonsterInstances);
 
                 _gameContext.EventManager.Publish(new CombatStartedEvent(combatContext));
 
                 Console.WriteLine("");
                 return;
             }
+        }
+
+        private List<MonsterInstance> GetAllMonstersOfTheSameType(MonsterType monsterType)
+        {
+            var result = new List<MonsterInstance>();
+
+            foreach (var monster in _gameContext.DungeonManager.MonsterInstances)
+            {
+                if (monster.Data.MonsterType == monsterType)
+                {
+                    result.Add(monster);
+                    Console.WriteLine($"MonsterInstance selected: {monster.Data.EntityType.ToString()}");
+                }
+                Console.WriteLine("");
+            }
+
+            return result;
         }
 
         private void OnPartyMemberInstanceSelected(PartyMemberInstanceSelectedEvent e)
