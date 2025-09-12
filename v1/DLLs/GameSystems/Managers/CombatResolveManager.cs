@@ -30,10 +30,7 @@ namespace GameSystems.Managers
 
             effectContext.Targets = _combatContext.MonsterInstances;
 
-            foreach (var attackAbility in _combatContext.PartymemberInstance.AttackAbilities)
-            {
-                attackAbility.ExecuteAbility(effectContext);
-            }
+            _combatContext.AttackAbility.ExecuteAttack(effectContext);
 
             foreach (var target in effectContext.Targets)
             {

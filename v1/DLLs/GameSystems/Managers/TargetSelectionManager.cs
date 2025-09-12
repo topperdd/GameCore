@@ -1,4 +1,5 @@
-﻿using GameCore.DungeonEntities.Monsters;
+﻿using GameCore.Abilities.AttackAbility;
+using GameCore.DungeonEntities.Monsters;
 using GameCore.Interfaces;
 using GameCore.Partymember;
 using GameRuntime.Contexts;
@@ -28,11 +29,21 @@ namespace GameSystems.Managers
             {
                 var monsterType = e.MonsterInstance.Data.MonsterType;
 
-                MonsterInstances = GetAllMonstersOfTheSameType(monsterType);
+                var attack = PartymemberInstance.AttackAbilities.Find(a => (a as AttackAbilityInstance)?.Data.MonsterTypeToKill == monsterType);
+
+                if (attack != null)
+                {
+                    MonsterInstances = GetAllMonstersOfTheSameType(monsterType);
+                }
+                else
+                {
+                    attack = PartymemberInstance.AttackAbilities.Where(q => (q as AttackAbilityInstance)?.Data.AbilityId == "AttackOneMonster").FirstOrDefault();
+                    MonsterInstances = new List<MonsterInstance> { e.MonsterInstance };
+                }
 
                 Console.WriteLine($"PartymemberInstance: {PartymemberInstance.Data.Class.ToString()} is targeting MonsterType: {monsterType}");
 
-                var combatContext = new CombatContext(PartymemberInstance, MonsterInstances);
+                var combatContext = new CombatContext(PartymemberInstance, MonsterInstances, attack);
 
                 _gameContext.EventManager.Publish(new CombatStartedEvent(combatContext));
 

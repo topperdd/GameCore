@@ -1,3 +1,4 @@
 ﻿{
-  "Class": "Mage"
+  "Class": "Mage",
+  "AttackAbilityIds": [ "AttackOneMonster", "AttackAllOozes" ]
 }

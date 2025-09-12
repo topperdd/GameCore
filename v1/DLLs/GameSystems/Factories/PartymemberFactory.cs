@@ -24,7 +24,7 @@ namespace GameSystems.Factories
         {
             var partymemberData = _partymemberDataList.FirstOrDefault(p => p.Class == partymemberClass);
 
-            var attackAbilities = new List<IAbility>();
+            var attackAbilities = new List<IAttackAbility>();
 
             foreach (var abilityId in partymemberData.AttackAbilityIds)
             {

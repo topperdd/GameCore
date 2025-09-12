@@ -22,8 +22,6 @@ namespace GameCore.DungeonEntities.Monsters
                 CurrentHealth = 0;
                 Console.WriteLine($"Monster of type {Data.MonsterType} has been defeated.");
                 Console.WriteLine("");
-
-
             }
         }
     }

@@ -10,13 +10,14 @@ var combatResolveManager = new CombatResolveManager(gameContext);
 
 var partymemberFactory = new PartymemberFactory(gameContext);
 partymemberFactory.CreatePartymemberInstance(PartymemberClass.Warrior);
+partymemberFactory.CreatePartymemberInstance(PartymemberClass.Mage);
 
 
 var dungeonEntityFactory = new DungeonEntityFactory(gameContext);
 dungeonEntityFactory.CreateMonsterInstance(MonsterType.Goblin);
 dungeonEntityFactory.CreateMonsterInstance(MonsterType.Goblin);
-dungeonEntityFactory.CreateMonsterInstance(MonsterType.Skeleton);
-dungeonEntityFactory.CreateMonsterInstance(MonsterType.Skeleton);
+dungeonEntityFactory.CreateMonsterInstance(MonsterType.Ooze);
+dungeonEntityFactory.CreateMonsterInstance(MonsterType.Ooze);
 
 foreach (var partymember in gameContext.PartymemberManager.PartymemberInstances)
 {
@@ -31,8 +32,8 @@ foreach (var monster in gameContext.DungeonManager.MonsterInstances)
 }
 Console.WriteLine("");
 
-gameContext.EventManager.Publish(new PartyMemberInstanceSelectedEvent(gameContext.PartymemberManager.PartymemberInstances[0]));
-gameContext.EventManager.Publish(new MonsterInstanceSelectedEvent(gameContext.DungeonManager.MonsterInstances[0]));
+gameContext.EventManager.Publish(new PartyMemberInstanceSelectedEvent(gameContext.PartymemberManager.PartymemberInstances[1]));
+gameContext.EventManager.Publish(new MonsterInstanceSelectedEvent(gameContext.DungeonManager.MonsterInstances[1]));
 
 Console.WriteLine("After Fight:");
 foreach (var monster in gameContext.DungeonManager.MonsterInstances)

@@ -1,0 +1,5 @@
+﻿{
+  "EffectId": "KillMonsterDamageEffect",
+  "Type": "Damage",
+  "Value": 1
+}

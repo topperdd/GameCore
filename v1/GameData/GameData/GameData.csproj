@@ -11,13 +11,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Resources\Abilities\AttackAbilities\AttackMonster.json">
+    <Content Include="Resources\Abilities\AttackAbilities\AttackOneMonster.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Abilities\Effects\KillOneMonsterTypeEffect.json">
+    <Content Include="Resources\Abilities\AttackAbilities\AttackAllOozes.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\DungeonEntities\Monsters\Skeleton.json">
+    <Content Include="Resources\Abilities\AttackAbilities\AttackAllGoblins.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Abilities\Effects\KillMonsterDamageEffect.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\DungeonEntities\Monsters\Ooze.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\DungeonEntities\Monsters\Goblin.json">

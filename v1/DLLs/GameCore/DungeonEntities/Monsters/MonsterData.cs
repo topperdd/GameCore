@@ -18,7 +18,8 @@ namespace GameCore.DungeonEntities.Monsters
 public enum MonsterType
 {
     Goblin,
-    Skeleton
+    Ooze,
+    Any
 }
 
 public enum DungeonEntityType

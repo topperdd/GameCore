@@ -1,4 +1,4 @@
 ﻿{
   "Class": "Warrior",
-  "AttackAbilityIds": [ "AttackMonster" ]
+  "AttackAbilityIds": [ "AttackOneMonster", "AttackAllGoblins" ]
 }

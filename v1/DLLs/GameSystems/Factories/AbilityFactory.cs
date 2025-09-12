@@ -16,7 +16,7 @@ namespace GameSystems.Factories
     public class AbilityFactory
     {
         private GameContext _gameContext;
-        private List<AbilityData> _attackAbilityData = new List<AbilityData>();
+        private List<AttackAbilityData> _attackAbilityData = new List<AttackAbilityData>();
         private EffectFactory _effectFactory;
 
         public AbilityFactory(GameContext gameContext)
@@ -26,7 +26,7 @@ namespace GameSystems.Factories
             _attackAbilityData = LoadAttackAbilityResources();
         }
 
-        internal IAbility CreateAttackAbilityInstance(string abilityId)
+        internal IAttackAbility CreateAttackAbilityInstance(string abilityId)
         {
             var abilityData = _attackAbilityData.FirstOrDefault(a => a.AbilityId == abilityId);
 
@@ -40,9 +40,9 @@ namespace GameSystems.Factories
             return new AttackAbilityInstance(abilityData, effects);
         }
 
-        private List<AbilityData> LoadAttackAbilityResources()
+        private List<AttackAbilityData> LoadAttackAbilityResources()
         {
-            var result = new List<AbilityData>();
+            var result = new List<AttackAbilityData>();
 
             string path = Path.Combine("Resources", "Abilities", "AttackAbilities");
 
@@ -58,7 +58,7 @@ namespace GameSystems.Factories
             {
                 string json = File.ReadAllText(attackAbility);
 
-                AbilityData attackAbilityData = JsonSerializer.Deserialize<AbilityData>(json, options);
+                AttackAbilityData attackAbilityData = JsonSerializer.Deserialize<AttackAbilityData>(json, options);
 
                 result.Add(attackAbilityData);
             }
