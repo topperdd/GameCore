@@ -21,10 +21,10 @@ namespace GameSystems.Managers
         {
             _combatContext = e.CombatContext;
 
-            ResolveCombat();
+            ResolveMonsterCombat();
         }
 
-        private void ResolveCombat()
+        private void ResolveMonsterCombat()
         {
             var effectContext = new EffectContext();
 
@@ -38,6 +38,8 @@ namespace GameSystems.Managers
 
                 _gameContext.EventManager.Publish(new MonsterDiedEvent(monster));
             }
+
+            _gameContext.EventManager.Publish(new PartymemberDiedEvent(_combatContext.PartymemberInstance));
         }
     }
 }

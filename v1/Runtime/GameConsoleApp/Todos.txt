@@ -7,4 +7,5 @@
 - [x] Implement MonsterHealth (erstmal Leben abziehen und checken ob tot)
 - [x] Implement PartymemberManager für erstelle Partymember
 - [x] Implement DungeonManager für erstelle Monster
-- [ ] Attacke implementieren
+- [x] Attacke implementieren
+- 

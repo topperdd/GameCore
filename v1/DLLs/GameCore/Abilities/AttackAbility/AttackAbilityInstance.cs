@@ -1,5 +1,4 @@
 ﻿using GameCore.Abilities.Effects;
-using GameCore.DungeonEntities.Monsters;
 using GameRuntime.Contexts;
 
 namespace GameCore.Abilities.AttackAbility
@@ -7,12 +6,17 @@ namespace GameCore.Abilities.AttackAbility
     public class AttackAbilityInstance : IAttackAbility
     {
         public AttackAbilityData Data { get; set; }
+
         public List<IEffect> Effects { get; set; }
+        public MonsterType MonsterToKill { get; }
+        public string AbilityId { get; }
 
         public AttackAbilityInstance(AttackAbilityData data, List<IEffect> effectData)
         {
             Data = data;
             Effects = effectData;
+            MonsterToKill = data.MonsterTypeToKill;
+            AbilityId = data.AbilityId;
         }
 
         public void ExecuteAttack(EffectContext effectContext)

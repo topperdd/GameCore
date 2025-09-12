@@ -29,7 +29,7 @@ namespace GameSystems.Managers
             {
                 var monsterType = e.MonsterInstance.Data.MonsterType;
 
-                var attack = PartymemberInstance.AttackAbilities.Find(a => (a as AttackAbilityInstance)?.Data.MonsterTypeToKill == monsterType);
+                var attack = PartymemberInstance.AttackAbilities.Find(attack => attack.MonsterToKill == monsterType);
 
                 if (attack != null)
                 {
@@ -37,7 +37,8 @@ namespace GameSystems.Managers
                 }
                 else
                 {
-                    attack = PartymemberInstance.AttackAbilities.Where(q => (q as AttackAbilityInstance)?.Data.AbilityId == "AttackOneMonster").FirstOrDefault();
+                    attack = PartymemberInstance.AttackAbilities.Where(q => q.AbilityId == "AttackOneMonster").FirstOrDefault();
+
                     MonsterInstances = new List<MonsterInstance> { e.MonsterInstance };
                 }
 

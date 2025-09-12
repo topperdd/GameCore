@@ -1,4 +1,5 @@
-﻿using GameCore.Partymember;
+﻿#nullable disable
+
 using GameRuntime.Contexts;
 using GameRuntime.Events;
 using GameSystems.Factories;
@@ -19,7 +20,7 @@ dungeonEntityFactory.CreateMonsterInstance(MonsterType.Goblin);
 dungeonEntityFactory.CreateMonsterInstance(MonsterType.Ooze);
 dungeonEntityFactory.CreateMonsterInstance(MonsterType.Ooze);
 
-foreach (var partymember in gameContext.PartymemberManager.PartymemberInstances)
+foreach (var partymember in gameContext.PartymemberManager.ActivePartymemberInstances)
 {
     Console.WriteLine($"Partymember Class: {partymember.Data.Class.ToString()}");
 }
@@ -32,12 +33,25 @@ foreach (var monster in gameContext.DungeonManager.MonsterInstances)
 }
 Console.WriteLine("");
 
-gameContext.EventManager.Publish(new PartyMemberInstanceSelectedEvent(gameContext.PartymemberManager.PartymemberInstances[1]));
+gameContext.EventManager.Publish(new PartyMemberInstanceSelectedEvent(gameContext.PartymemberManager.ActivePartymemberInstances[1]));
 gameContext.EventManager.Publish(new MonsterInstanceSelectedEvent(gameContext.DungeonManager.MonsterInstances[1]));
 
 Console.WriteLine("After Fight:");
 foreach (var monster in gameContext.DungeonManager.MonsterInstances)
 {
     Console.WriteLine($"Monster Type: {monster.Data.MonsterType}, CurrentLife: {monster.CurrentHealth}");
+}
+Console.WriteLine("");
+
+
+foreach (var partymember in gameContext.PartymemberManager.DeadPartymemberInstances)
+{
+    Console.WriteLine($"Partymember dead: {partymember.Data.Class}");
+}
+Console.WriteLine("");
+
+foreach (var partymember in gameContext.PartymemberManager.ActivePartymemberInstances)
+{
+    Console.WriteLine($"Partymember alive: {partymember.Data.Class}");
 }
 Console.WriteLine("");
