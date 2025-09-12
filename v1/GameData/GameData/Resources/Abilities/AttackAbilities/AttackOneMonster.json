@@ -2,6 +2,6 @@
   "AbilityId": "AttackOneMonster",
   "MonsterTypeToKill": "Any",
   "EffectIds": [
-    "KillMonsterDamageEffect"
+    "KillMonsterEffect"
   ]
 }

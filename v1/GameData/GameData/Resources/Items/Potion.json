@@ -1,0 +1,4 @@
+﻿{
+  "ItemId": "Potion",
+  "EffectIds": ["RevivePartymemberEffect"]
+}

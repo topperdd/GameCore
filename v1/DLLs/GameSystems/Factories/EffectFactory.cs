@@ -1,14 +1,10 @@
-﻿using GameCore.Abilities;
-using GameCore.Abilities.AttackAbility;
+﻿#nullable disable
+
 using GameCore.Abilities.Effects;
 using GameRuntime.Contexts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+
 
 namespace GameSystems.Factories
 {
@@ -34,6 +30,10 @@ namespace GameSystems.Factories
                 case EffectType.Damage:
                     newEffect = new DamageEffect(effectData);
                     break;
+
+                case EffectType.Item:
+                    newEffect = new ItemEffect(effectData);
+                    break;
             }
 
             return newEffect;
@@ -43,7 +43,7 @@ namespace GameSystems.Factories
         {
             var result = new List<EffectData>();
 
-            string path = Path.Combine("Resources", "Abilities", "Effects");
+            string path = Path.Combine("Resources", "Effects");
 
             var jsonFiles = Directory.GetFiles(path, "*.json");
 

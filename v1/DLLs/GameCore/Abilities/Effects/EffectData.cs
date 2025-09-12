@@ -10,5 +10,6 @@
 
 public enum EffectType
 {
-    Damage
+    Damage,
+    Item
 }
