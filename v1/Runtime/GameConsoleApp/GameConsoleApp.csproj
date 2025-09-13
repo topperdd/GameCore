@@ -9,8 +9,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\DLLs\GameCore\GameCore.csproj" />
-    <ProjectReference Include="..\..\DLLs\GameRuntime\GameRuntime.csproj" />
-    <ProjectReference Include="..\..\DLLs\GameSystems\GameSystems.csproj" />
     <ProjectReference Include="..\..\GameData\GameData\GameData.csproj" />
   </ItemGroup>
 
