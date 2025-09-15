@@ -29,11 +29,11 @@ namespace GameCore.Runtime.Factories
             switch (effectData.Type)
             {
                 case EffectType.Damage:
-                    newEffect = new DamageEffect(effectData);
+                    newEffect = new KillMonsterEffect(effectData);
                     break;
 
-                case EffectType.Potion:
-                    newEffect = new PotionEffect(effectData);
+                case EffectType.RevivePartymember:
+                    newEffect = new ReviveEffect(effectData);
                     break;
             }
 

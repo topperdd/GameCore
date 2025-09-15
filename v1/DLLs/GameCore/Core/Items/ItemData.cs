@@ -2,7 +2,13 @@
 {
     public class ItemData
     {
-        public string ItemId { get; set; } = string.Empty;
+        public ItemType ItemType { get; set; }
+        public TargetType TargetType { get; set; }
         public List<string> EffectIds { get; set; } = new List<string>();
     }
+}
+
+public enum ItemType
+{
+    Potion
 }

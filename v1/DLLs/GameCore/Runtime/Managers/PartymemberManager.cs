@@ -1,4 +1,5 @@
 ﻿using GameCore.Contexts;
+using GameCore.Runtime.Events;
 using GameCore.Runtime.Events.Combat;
 using GameCore.Runtime.Events.Creation;
 using GameCore.Runtime.Instances;
@@ -14,6 +15,13 @@ namespace GameCore.Runtime.Managers
         {
             gameContext.EventManager.Subscribe<PartymemberCreatedEvent>(OnPartymemberCreated);
             gameContext.EventManager.Subscribe<PartymemberDiedEvent>(OnPartymemberDied);
+            gameContext.EventManager.Subscribe<PartymemberRevivedEvent>(OnPartymemberRevived);
+        }
+
+        private void OnPartymemberRevived(PartymemberRevivedEvent e)
+        {
+            DeadPartymemberInstances.Remove(e.Partymember);
+            ActivePartymemberInstances.Add(e.Partymember);
         }
 
         private void OnPartymemberDied(PartymemberDiedEvent e)

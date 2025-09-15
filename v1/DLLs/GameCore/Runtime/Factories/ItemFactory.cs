@@ -21,9 +21,9 @@ namespace GameCore.Runtime.Factories
             _effectFactory = new EffectFactory(_gameContext);
         }
 
-        public void CreateItemInstance(string itemId)
+        public void CreateItemInstance(ItemType itemType)
         {
-            var itemData = _itemDataList.FirstOrDefault(a => a.ItemId == itemId);
+            var itemData = _itemDataList.FirstOrDefault(a => a.ItemType == itemType);
 
             var effects = new List<IEffect>();
 

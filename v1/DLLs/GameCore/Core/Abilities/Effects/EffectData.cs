@@ -11,5 +11,5 @@
 public enum EffectType
 {
     Damage,
-    Potion
+    RevivePartymember,
 }

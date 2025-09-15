@@ -64,6 +64,20 @@ Console.WriteLine("");
 
 
 #region ItemUsage
-itemFactory.CreateItemInstance("Potion");
+itemFactory.CreateItemInstance(ItemType.Potion);
+gameContext.EventManager.Publish(new PartyMemberInstanceSelectedEvent(gameContext.PartymemberManager.ActivePartymemberInstances[0]));
+gameContext.EventManager.Publish(new ItemInstanceSelectedEvent(gameContext.InventoryManager.ItemInstances[0]));
+
+foreach (var partymember in gameContext.PartymemberManager.DeadPartymemberInstances)
+{
+    Console.WriteLine($"Partymember dead: {partymember.Data.Class}");
+}
+Console.WriteLine("");
+
+foreach (var partymember in gameContext.PartymemberManager.ActivePartymemberInstances)
+{
+    Console.WriteLine($"Partymember alive: {partymember.Data.Class}");
+}
+Console.WriteLine("");
 
 #endregion

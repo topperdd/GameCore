@@ -1,5 +1,5 @@
 ﻿{
   "EffectId": "RevivePartymemberEffect",
-  "Type": "Potion",
+  "Type": "RevivePartymember",
   "Value": 1
 }

@@ -26,16 +26,9 @@ namespace GameCore.Runtime.Managers
         {
             var effectContext = new EffectContext();
 
-            effectContext.Targets = _combatContext.MonsterInstances;
+            effectContext.DamageableTargets = _combatContext.MonsterInstances;
 
             _combatContext.AttackAbility.ExecuteAttack(effectContext);
-
-            foreach (var target in effectContext.Targets)
-            {
-                var monster = target as MonsterInstance;
-
-                _gameContext.EventManager.Publish(new MonsterDiedEvent(monster));
-            }
 
             _gameContext.EventManager.Publish(new PartymemberDiedEvent(_combatContext.PartymemberInstance));
         }

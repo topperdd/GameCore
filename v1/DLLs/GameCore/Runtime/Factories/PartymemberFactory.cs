@@ -34,7 +34,7 @@ namespace GameCore.Runtime.Factories
                 attackAbilities.Add(newAbility);
             }
 
-            var partymemberInstance = new PartymemberInstance(partymemberData, attackAbilities); 
+            var partymemberInstance = new PartymemberInstance(partymemberData, attackAbilities, _gameContext); 
 
             _gameContext.EventManager.Publish(new PartymemberCreatedEvent(partymemberInstance));
         }

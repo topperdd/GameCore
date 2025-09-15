@@ -2,6 +2,7 @@
 using GameCore.Runtime.Events.Combat;
 using GameCore.Runtime.Events.Selection;
 using GameCore.Runtime.Instances;
+using Microsoft.VisualBasic;
 
 namespace GameCore.Runtime.Managers
 {
@@ -9,6 +10,7 @@ namespace GameCore.Runtime.Managers
     {
         public PartymemberInstance PartymemberInstance { get; private set; } = null!;
         public List<MonsterInstance> MonsterInstances { get; private set; } = new List<MonsterInstance>();
+
 
         private GameContext _gameContext;
 
@@ -18,6 +20,39 @@ namespace GameCore.Runtime.Managers
 
             _gameContext.EventManager.Subscribe<PartyMemberInstanceSelectedEvent>(OnPartyMemberInstanceSelected);
             _gameContext.EventManager.Subscribe<MonsterInstanceSelectedEvent>(OnMonsterInstanceSelected);
+            _gameContext.EventManager.Subscribe<ItemInstanceSelectedEvent>(OnItemInstanceSelected);
+        }
+
+        private void OnItemInstanceSelected(ItemInstanceSelectedEvent e)
+        {
+            if (PartymemberInstance != null)
+            {
+                var item = e.ItemInstance;
+                Console.WriteLine($"Item in Inventory: {item.ItemData.ItemType}");
+
+                var effectCtx = new EffectContext();
+
+                switch (item.ItemData.TargetType)
+                {
+                    case TargetType.None:
+                        break;
+
+                    case TargetType.Partymember:
+                        break;
+
+                    case TargetType.DeadPartymember:
+                        effectCtx.PartymemberToRevive = _gameContext.PartymemberManager.DeadPartymemberInstances[0];
+                        break;
+
+                    case TargetType.Monster:
+                        break;
+
+                    case TargetType.AllMonsters:
+                        break;
+                }
+
+                item.Use(effectCtx);
+            }
         }
 
         private void OnMonsterInstanceSelected(MonsterInstanceSelectedEvent e)
@@ -74,4 +109,13 @@ namespace GameCore.Runtime.Managers
             Console.WriteLine("");
         }
     }
+}
+
+public enum TargetType
+{
+    None,
+    Partymember,
+    DeadPartymember,
+    Monster,
+    AllMonsters
 }

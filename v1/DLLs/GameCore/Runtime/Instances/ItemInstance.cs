@@ -1,4 +1,5 @@
-﻿using GameCore.Core.Abilities.Effects;
+﻿using GameCore.Contexts;
+using GameCore.Core.Abilities.Effects;
 using GameCore.Core.Interfaces;
 using GameCore.Core.Items;
 
@@ -15,9 +16,12 @@ namespace GameCore.Runtime.Instances
             EffectData = effectData;
         }
 
-        public void Use()
+        public void Use(EffectContext effectContext)
         {
- 
+            foreach (var effect in EffectData)
+            {
+                effect.ApplyEffect(effectContext);
+            }
         }
     }
 }

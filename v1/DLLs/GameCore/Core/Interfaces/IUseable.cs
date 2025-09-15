@@ -1,7 +1,9 @@
-﻿namespace GameCore.Core.Interfaces
+﻿using GameCore.Contexts;
+
+namespace GameCore.Core.Interfaces
 {
     public interface IUseable
     {
-        public void Use();
+        public void Use(EffectContext effectContext);
     }
 }

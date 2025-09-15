@@ -21,7 +21,7 @@ namespace GameCore.Runtime.Factories
         {
             var monsterDataToGenerate = _monsterDataList.Where(q => q.MonsterType == monsterType).FirstOrDefault();
 
-            var monsterInstance = new MonsterInstance(monsterDataToGenerate);
+            var monsterInstance = new MonsterInstance(monsterDataToGenerate, _gameContext);
             
             _gameContext.EventManager.Publish(new MonsterCreatedEvent(monsterInstance));
         }

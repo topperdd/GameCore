@@ -3,18 +3,18 @@ using GameCore.Core.Abilities.Effects;
 
 namespace GameCore.Runtime.Instances.Effects
 {
-    public class ItemEffect : IEffect
+    public class ReviveEffect : IEffect
     {
         public EffectData EffectData { get; private set; }
 
-        public ItemEffect(EffectData effectData)
+        public ReviveEffect(EffectData effectData)
         {
             EffectData = effectData;
         }
 
         public void ApplyEffect(EffectContext effectContext)
         {
-            Console.WriteLine("ItemEffect applied!");
+            effectContext.PartymemberToRevive.Revive();
         }
     }
 }
