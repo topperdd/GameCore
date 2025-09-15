@@ -34,7 +34,9 @@ namespace GameCore.Runtime.Factories
                 attackAbilities.Add(newAbility);
             }
 
-            var partymemberInstance = new PartymemberInstance(partymemberData, attackAbilities, _gameContext); 
+            var lootAbility = _abilityFactory.CreateLootAbilityInstance(partymemberData.LootAbilityId);
+
+            var partymemberInstance = new PartymemberInstance(partymemberData, attackAbilities, lootAbility, _gameContext); 
 
             _gameContext.EventManager.Publish(new PartymemberCreatedEvent(partymemberInstance));
         }

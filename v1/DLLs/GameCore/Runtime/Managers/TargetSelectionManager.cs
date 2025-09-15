@@ -2,7 +2,6 @@
 using GameCore.Runtime.Events.Combat;
 using GameCore.Runtime.Events.Selection;
 using GameCore.Runtime.Instances;
-using Microsoft.VisualBasic;
 
 namespace GameCore.Runtime.Managers
 {
@@ -21,6 +20,20 @@ namespace GameCore.Runtime.Managers
             _gameContext.EventManager.Subscribe<PartyMemberInstanceSelectedEvent>(OnPartyMemberInstanceSelected);
             _gameContext.EventManager.Subscribe<MonsterInstanceSelectedEvent>(OnMonsterInstanceSelected);
             _gameContext.EventManager.Subscribe<ItemInstanceSelectedEvent>(OnItemInstanceSelected);
+            _gameContext.EventManager.Subscribe<LootInstanceSelectedEvent>(OnLootInstanceSelected);
+        }
+
+        private void OnLootInstanceSelected(LootInstanceSelectedEvent e)
+        {
+            if (PartymemberInstance != null)
+            {
+                var lootCtx = new LootContext();
+
+                lootCtx.LootInstance = e.LootInstance;
+                lootCtx.PartymemberInstance = PartymemberInstance;
+
+                PartymemberInstance.LootAbility.ExecuteLoot(lootCtx);
+            }
         }
 
         private void OnItemInstanceSelected(ItemInstanceSelectedEvent e)
@@ -52,6 +65,8 @@ namespace GameCore.Runtime.Managers
                 }
 
                 item.Use(effectCtx);
+
+                PartymemberInstance = null!;
             }
         }
 
@@ -81,6 +96,8 @@ namespace GameCore.Runtime.Managers
                 _gameContext.EventManager.Publish(new CombatStartedEvent(combatContext));
 
                 Console.WriteLine("");
+
+                PartymemberInstance = null!;
                 return;
             }
         }

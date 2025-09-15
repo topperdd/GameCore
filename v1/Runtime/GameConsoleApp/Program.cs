@@ -28,10 +28,10 @@ foreach (var partymember in gameContext.PartymemberManager.ActivePartymemberInst
     Console.WriteLine($"Partymember Class: {partymember.Data.Class.ToString()}");
 }
 Console.WriteLine("");
-
+Console.WriteLine("-------------------------------------------------------------------------------------------------------");
 
 #region Fight
-Console.WriteLine("Before Fight:");
+Console.WriteLine("Fighting:");
 foreach (var monster in gameContext.DungeonManager.MonsterInstances)
 {
     Console.WriteLine($"Monster Type: {monster.Data.MonsterType}, CurrentLife: {monster.CurrentHealth}");
@@ -60,10 +60,12 @@ foreach (var partymember in gameContext.PartymemberManager.ActivePartymemberInst
     Console.WriteLine($"Partymember alive: {partymember.Data.Class}");
 }
 Console.WriteLine("");
+Console.WriteLine("-------------------------------------------------------------------------------------------------------");
 #endregion
 
 
 #region ItemUsage
+Console.WriteLine("Using Item:");
 itemFactory.CreateItemInstance(ItemType.Potion);
 gameContext.EventManager.Publish(new PartyMemberInstanceSelectedEvent(gameContext.PartymemberManager.ActivePartymemberInstances[0]));
 gameContext.EventManager.Publish(new ItemInstanceSelectedEvent(gameContext.InventoryManager.ItemInstances[0]));
@@ -79,5 +81,14 @@ foreach (var partymember in gameContext.PartymemberManager.ActivePartymemberInst
     Console.WriteLine($"Partymember alive: {partymember.Data.Class}");
 }
 Console.WriteLine("");
+Console.WriteLine("-------------------------------------------------------------------------------------------------------");
+#endregion
 
+
+#region TreasureChestLooting
+Console.WriteLine("Looting Treasure Chest:");
+dungeonEntityFactory.CreateLootInstance(LootType.TreasureChest);
+gameContext.EventManager.Publish(new PartyMemberInstanceSelectedEvent(gameContext.PartymemberManager.ActivePartymemberInstances[0]));
+gameContext.EventManager.Publish(new LootInstanceSelectedEvent(gameContext.DungeonManager.LootInstances[0]));
+Console.WriteLine("-------------------------------------------------------------------------------------------------------");
 #endregion

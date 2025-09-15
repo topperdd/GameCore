@@ -1,4 +1,5 @@
 ﻿{
   "Class": "Mage",
-  "AttackAbilityIds": [ "AttackOneMonster", "AttackAllOozes" ]
+  "AttackAbilityIds": [ "AttackOneMonster", "AttackAllOozes" ],
+  "LootAbilityId": "LootTreasureChest"
 }

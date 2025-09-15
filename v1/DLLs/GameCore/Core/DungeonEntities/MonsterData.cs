@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameCore.Core.DungeonEntities.Monsters
+namespace GameCore.Core.DungeonEntities
 {
     public class MonsterData
     {
@@ -24,7 +24,7 @@ public enum MonsterType
 
 public enum DungeonEntityType
 {
-    Monster
-    //Loot,
+    Monster,
+    Loot,
     //Dragon
 }

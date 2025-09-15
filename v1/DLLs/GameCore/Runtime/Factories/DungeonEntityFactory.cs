@@ -1,5 +1,5 @@
 ﻿using GameCore.Contexts;
-using GameCore.Core.DungeonEntities.Monsters;
+using GameCore.Core.DungeonEntities;
 using GameCore.Runtime.Events.Creation;
 using GameCore.Runtime.Instances;
 using System.Text.Json;
@@ -10,10 +10,13 @@ namespace GameCore.Runtime.Factories
     public class DungeonEntityFactory
     {
         private List<MonsterData> _monsterDataList = new List<MonsterData>();
+        private List<LootData> _lootDataList = new List<LootData>();
         private GameContext _gameContext;
         public DungeonEntityFactory(GameContext gameContext)
         {
-            _monsterDataList = LoadMonsterResources();
+            _monsterDataList = LoadResources<MonsterData>(DungeonEntityType.Monster);
+            _lootDataList = LoadResources<LootData>(DungeonEntityType.Loot);
+
             _gameContext = gameContext ?? throw new ArgumentNullException(nameof(gameContext));
         }
 
@@ -22,17 +25,36 @@ namespace GameCore.Runtime.Factories
             var monsterDataToGenerate = _monsterDataList.Where(q => q.MonsterType == monsterType).FirstOrDefault();
 
             var monsterInstance = new MonsterInstance(monsterDataToGenerate, _gameContext);
-            
+
             _gameContext.EventManager.Publish(new MonsterCreatedEvent(monsterInstance));
         }
 
-        private List<MonsterData> LoadMonsterResources()
+        public void CreateLootInstance(LootType lootType)
         {
-            var result = new List<MonsterData>();
+            var lootDataToGenerate = _lootDataList.Where(q => q.LootType == lootType).FirstOrDefault();
 
-            string path = Path.Combine("Resources", "DungeonEntities", "Monsters");
+            var lootInstance = new LootInstance(lootDataToGenerate, _gameContext);
+
+            _gameContext.EventManager.Publish(new LootCreatedEvent(lootInstance));
+        }
+
+        private List<T> LoadResources<T>(DungeonEntityType dungeonEntityType)
+        {
+            var result = new List<T>();
+            string path = string.Empty;
+
+            switch (dungeonEntityType)
+            {
+                case DungeonEntityType.Monster:
+                    path = Path.Combine("Resources", "DungeonEntities", "Monsters");
+
+                    break;
+                case DungeonEntityType.Loot:
+                    path = Path.Combine("Resources", "DungeonEntities", "Loot");
+                    break;
+            }
+
             var jsonFiles = Directory.GetFiles(path, "*.json");
-
             var options = new JsonSerializerOptions
             {
                 Converters = { new JsonStringEnumConverter() },
@@ -42,9 +64,7 @@ namespace GameCore.Runtime.Factories
             foreach (var entity in jsonFiles)
             {
                 string json = File.ReadAllText(entity);
-
-                MonsterData dungeonEntityJsonConfigs = JsonSerializer.Deserialize<MonsterData>(json, options);
-
+                T dungeonEntityJsonConfigs = JsonSerializer.Deserialize<T>(json, options);
                 if (dungeonEntityJsonConfigs != null)
                 {
                     result.Add(dungeonEntityJsonConfigs);

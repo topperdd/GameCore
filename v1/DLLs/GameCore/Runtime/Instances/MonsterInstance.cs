@@ -1,5 +1,5 @@
 ﻿using GameCore.Contexts;
-using GameCore.Core.DungeonEntities.Monsters;
+using GameCore.Core.DungeonEntities;
 using GameCore.Core.Interfaces;
 using GameCore.Runtime.Events.Combat;
 

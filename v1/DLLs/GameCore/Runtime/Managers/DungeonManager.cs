@@ -1,5 +1,4 @@
-﻿
-using GameCore.Contexts;
+﻿using GameCore.Contexts;
 using GameCore.Runtime.Events.Combat;
 using GameCore.Runtime.Events.Creation;
 using GameCore.Runtime.Instances;
@@ -11,6 +10,7 @@ namespace GameCore.Runtime.Managers
         private GameContext _gameContext;
 
         public List<MonsterInstance> MonsterInstances { get; private set; } = new List<MonsterInstance>();
+        public List<LootInstance> LootInstances { get; private set; } = new List<LootInstance>();
 
         public DungeonManager(GameContext gameContext)
         {
@@ -18,6 +18,13 @@ namespace GameCore.Runtime.Managers
 
             _gameContext.EventManager.Subscribe<MonsterCreatedEvent>(OnMonsterCreated);
             _gameContext.EventManager.Subscribe<MonsterDiedEvent>(OnMonsterDied);
+
+            _gameContext.EventManager.Subscribe<LootCreatedEvent>(OnLootCreated);
+        }
+
+        private void OnLootCreated(LootCreatedEvent e)
+        {
+            LootInstances.Add(e.LootInstance);
         }
 
         private void OnMonsterDied(MonsterDiedEvent e)
