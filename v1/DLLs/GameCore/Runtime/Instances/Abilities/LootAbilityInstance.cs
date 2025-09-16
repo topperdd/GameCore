@@ -15,8 +15,9 @@ namespace GameCore.Runtime.Instances.Abilities
             AbilityId = LootAbilityData.AbilityId;
         }
 
-        public void ExecuteLoot(LootContext lootContext)
+        public void ExecuteAbility<T>(T context)
         {
+            var lootContext = context as LootContext;   
             lootContext.LootInstance.Loot();
         }
     }

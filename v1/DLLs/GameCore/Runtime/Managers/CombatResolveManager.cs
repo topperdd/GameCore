@@ -28,9 +28,17 @@ namespace GameCore.Runtime.Managers
 
             effectContext.DamageableTargets = _combatContext.MonsterInstances;
 
-            _combatContext.AttackAbility.ExecuteAttack(effectContext);
+            _combatContext.AttackAbility.ExecuteAbility(effectContext);
 
-            _gameContext.EventManager.Publish(new PartymemberDiedEvent(_combatContext.PartymemberInstance));
+            if (_combatContext.PartymemberInstance != null)
+            {
+                _gameContext.EventManager.Publish(new PartymemberDiedEvent(_combatContext.PartymemberInstance));
+            }
+
+            if (_combatContext.HeroInstance != null)
+            {
+                Console.WriteLine("Hero Active Ability used.");
+            }
         }
     }
 }

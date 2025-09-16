@@ -1,11 +1,10 @@
 ﻿using GameCore.Contexts;
+using GameCore.Core.Interfaces;
 
 namespace GameCore.Core.Abilities.AttackAbility
 {
-    public interface IAttackAbility
+    public interface IAttackAbility : IAbility
     {
-        public string AbilityId { get; }
         public MonsterType MonsterToKill { get; }
-        public void ExecuteAttack(EffectContext effectContext);
     }
 }

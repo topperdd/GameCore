@@ -1,4 +1,6 @@
 ﻿{
   "HeroId": "ArkanerSchwertmeister",
-  "HeroType": "Base"
+  "HeroType": "Base",
+  "AttackAbilityIds": [ "AttackAllGoblins", "AttackAllOozes" ],
+  "LootAbilityId": "LootTreasureChest"
 }

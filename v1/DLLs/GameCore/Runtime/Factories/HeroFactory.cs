@@ -1,6 +1,7 @@
 ﻿using GameCore.Contexts;
 using GameCore.Core;
 using GameCore.Core.Abilities.AttackAbility;
+using GameCore.Core.Interfaces;
 using GameCore.Runtime.Events.Creation;
 using GameCore.Runtime.Instances;
 using System.Text.Json;
@@ -11,31 +12,39 @@ namespace GameCore.Runtime.Factories
     public class HeroFactory
     {
         private List<HeroData> _heroBaseDataList = new List<HeroData>();
-        private GameContext _gameContext;
+        private GameContext _gameContext { get; set; }
+        private AbilityFactory _abilityFactory { get; set; }
 
         public HeroFactory(GameContext gameContext)
         {
             _heroBaseDataList = LoadResources<HeroData>(HeroType.Base);
             _gameContext = gameContext;
+            _abilityFactory = new AbilityFactory(gameContext);
         }
 
         public void CreateHeroBaseInstance(string heroBase)
         {
             var heroBaseData = _heroBaseDataList.FirstOrDefault(p => p.HeroId == heroBase);
 
-            //var attackAbilities = new List<IAttackAbility>();
+            var attackAbilities = GenerateAttackAbilities(heroBaseData);
+            var lootAbility = _abilityFactory.CreateLootAbilityInstance(heroBaseData.LootAbilityId);
 
-            //foreach (var abilityId in heroBaseData.AttackAbilityIds)
-            //{
-            //    var newAbility = _abilityFactory.CreateAttackAbilityInstance(abilityId);
-            //    attackAbilities.Add(newAbility);
-            //}
-
-            //var lootAbility = _abilityFactory.CreateLootAbilityInstance(heroBaseData.LootAbilityId);
-
-            var heroBaseInstance = new HeroInstance(heroBaseData, _gameContext);
+            var heroBaseInstance = new HeroInstance(heroBaseData, attackAbilities, lootAbility, _gameContext);
 
             _gameContext.EventManager.Publish(new BaseHeroCreatedEvent(heroBaseInstance));
+        }
+
+        private List<IAttackAbility> GenerateAttackAbilities(HeroData heroBaseData)
+        {
+            var attackAbilities = new List<IAttackAbility>();
+
+            foreach (var abilityId in heroBaseData.AttackAbilityIds)
+            {
+                var newAbility = _abilityFactory.CreateAttackAbilityInstance(abilityId);
+                attackAbilities.Add(newAbility);
+            }
+
+            return attackAbilities;
         }
 
         private List<T> LoadResources<T>(HeroType heroType)

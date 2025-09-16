@@ -24,6 +24,14 @@ dungeonEntityFactory.CreateMonsterInstance(MonsterType.Goblin);
 dungeonEntityFactory.CreateMonsterInstance(MonsterType.Ooze);
 dungeonEntityFactory.CreateMonsterInstance(MonsterType.Ooze);
 
+#region HeroCreation
+Console.WriteLine($"Hero creation:");
+heroFactory.CreateHeroBaseInstance("ArkanerSchwertmeister");
+
+Console.WriteLine($"Current active Hero: {gameContext.HeroManager.BaseHeroInstance.HeroData.HeroId}");
+#endregion
+
+
 foreach (var partymember in gameContext.PartymemberManager.ActivePartymemberInstances)
 {
     Console.WriteLine($"Partymember Class: {partymember.Data.Class.ToString()}");
@@ -39,8 +47,9 @@ foreach (var monster in gameContext.DungeonManager.MonsterInstances)
 }
 Console.WriteLine("");
 
-gameContext.EventManager.Publish(new PartyMemberInstanceSelectedEvent(gameContext.PartymemberManager.ActivePartymemberInstances[1]));
-gameContext.EventManager.Publish(new MonsterInstanceSelectedEvent(gameContext.DungeonManager.MonsterInstances[1]));
+//gameContext.EventManager.Publish(new PartyMemberInstanceSelectedEvent(gameContext.PartymemberManager.ActivePartymemberInstances[1]));
+gameContext.EventManager.Publish(new HeroInstanceSelectedEvent(gameContext.HeroManager.BaseHeroInstance));
+gameContext.EventManager.Publish(new MonsterInstanceSelectedEvent(gameContext.DungeonManager.MonsterInstances[2]));
 
 Console.WriteLine("After Fight:");
 foreach (var monster in gameContext.DungeonManager.MonsterInstances)
@@ -65,25 +74,25 @@ Console.WriteLine("-------------------------------------------------------------
 #endregion
 
 
-#region ItemUsage
-Console.WriteLine("Using Item:");
-itemFactory.CreateItemInstance(ItemType.Potion);
-gameContext.EventManager.Publish(new PartyMemberInstanceSelectedEvent(gameContext.PartymemberManager.ActivePartymemberInstances[0]));
-gameContext.EventManager.Publish(new ItemInstanceSelectedEvent(gameContext.InventoryManager.ItemInstancesInInventory[0]));
+//#region ItemUsage
+//Console.WriteLine("Using Item:");
+//itemFactory.CreateItemInstance(ItemType.Potion);
+//gameContext.EventManager.Publish(new PartyMemberInstanceSelectedEvent(gameContext.PartymemberManager.ActivePartymemberInstances[0]));
+//gameContext.EventManager.Publish(new ItemInstanceSelectedEvent(gameContext.InventoryManager.ItemInstancesInInventory[0]));
 
-foreach (var partymember in gameContext.PartymemberManager.DeadPartymemberInstances)
-{
-    Console.WriteLine($"Partymember dead: {partymember.Data.Class}");
-}
-Console.WriteLine("");
+//foreach (var partymember in gameContext.PartymemberManager.DeadPartymemberInstances)
+//{
+//    Console.WriteLine($"Partymember dead: {partymember.Data.Class}");
+//}
+//Console.WriteLine("");
 
-foreach (var partymember in gameContext.PartymemberManager.ActivePartymemberInstances)
-{
-    Console.WriteLine($"Partymember alive: {partymember.Data.Class}");
-}
-Console.WriteLine("");
-Console.WriteLine("-------------------------------------------------------------------------------------------------------");
-#endregion
+//foreach (var partymember in gameContext.PartymemberManager.ActivePartymemberInstances)
+//{
+//    Console.WriteLine($"Partymember alive: {partymember.Data.Class}");
+//}
+//Console.WriteLine("");
+//Console.WriteLine("-------------------------------------------------------------------------------------------------------");
+//#endregion
 
 
 #region TreasureChestLooting
@@ -100,9 +109,3 @@ foreach (var item in gameContext.InventoryManager.ItemInstancesInInventory)
 Console.WriteLine("-------------------------------------------------------------------------------------------------------");
 #endregion
 
-#region HeroCreation
-Console.WriteLine($"Hero creation:");
-heroFactory.CreateHeroBaseInstance("ArkanerSchwertmeister");
-
-Console.WriteLine($"Current active Hero: {gameContext.HeroManager.BaseHeroInstance.HeroData.HeroId}");
-#endregion

@@ -1,7 +1,5 @@
 ﻿{
   "AbilityId": "AttackAllGoblins",
   "MonsterTypeToKill": "Goblin",
-  "EffectIds": [
-    "KillMonsterEffect"
-  ]
+  "EffectIds": [ "KillMonsterEffect"]
 }

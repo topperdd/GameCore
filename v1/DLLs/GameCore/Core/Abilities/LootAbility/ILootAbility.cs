@@ -1,10 +1,9 @@
 ﻿using GameCore.Contexts;
+using GameCore.Core.Interfaces;
 
 namespace GameCore.Core.Abilities.LootAbility
 {
-    public interface ILootAbility
+    public interface ILootAbility : IAbility
     {
-        public string AbilityId { get; set; }
-        public void ExecuteLoot(LootContext lootContext);
     }
 }
