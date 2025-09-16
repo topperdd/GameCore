@@ -10,6 +10,7 @@ namespace GameCore.Core.DungeonEntities
     {
         public DungeonEntityType EntityType { get; set; }
         public LootType LootType { get; set; }
+        public List<ItemType> ItemType { get; set; }
     }
 }
 

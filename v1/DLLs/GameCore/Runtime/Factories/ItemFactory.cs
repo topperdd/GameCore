@@ -1,6 +1,6 @@
 ﻿using GameCore.Contexts;
+using GameCore.Core;
 using GameCore.Core.Abilities.Effects;
-using GameCore.Core.Items;
 using GameCore.Runtime.Events.Creation;
 using GameCore.Runtime.Instances;
 using System.Text.Json;
@@ -33,8 +33,9 @@ namespace GameCore.Runtime.Factories
                 effects.Add(newEffect);
             }
          
-            var itemInstance = new ItemInstance(itemData, effects);
+            var itemInstance = new ItemInstance(itemData, effects, _gameContext);
 
+            Console.WriteLine($"Item erstellt");
             _gameContext.EventManager.Publish(new ItemCreatedEvent(itemInstance));
         }
 

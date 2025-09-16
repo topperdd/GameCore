@@ -1,4 +1,4 @@
-﻿namespace GameCore.Core.Items
+﻿namespace GameCore.Core
 {
     public class ItemData
     {

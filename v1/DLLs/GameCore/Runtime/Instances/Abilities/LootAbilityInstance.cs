@@ -1,7 +1,7 @@
 ﻿using GameCore.Contexts;
 using GameCore.Core.Abilities.LootAbility;
 
-namespace GameCore.Runtime.Instances
+namespace GameCore.Runtime.Instances.Abilities
 {
     public class LootAbilityInstance : ILootAbility
     {

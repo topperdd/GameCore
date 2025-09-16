@@ -9,9 +9,10 @@ using GameCore.Runtime.Managers;
 var gameContext = new GameContext();
 var targetSelectionManager = new TargetSelectionManager(gameContext);
 var combatResolveManager = new CombatResolveManager(gameContext);
+
 var partymemberFactory = new PartymemberFactory(gameContext);
-var inventoryManager = new InventoryManager(gameContext);
 var itemFactory = new ItemFactory(gameContext); 
+var heroFactory = new HeroFactory(gameContext);
 
 partymemberFactory.CreatePartymemberInstance(PartymemberClass.Warrior);
 partymemberFactory.CreatePartymemberInstance(PartymemberClass.Mage);
@@ -68,7 +69,7 @@ Console.WriteLine("-------------------------------------------------------------
 Console.WriteLine("Using Item:");
 itemFactory.CreateItemInstance(ItemType.Potion);
 gameContext.EventManager.Publish(new PartyMemberInstanceSelectedEvent(gameContext.PartymemberManager.ActivePartymemberInstances[0]));
-gameContext.EventManager.Publish(new ItemInstanceSelectedEvent(gameContext.InventoryManager.ItemInstances[0]));
+gameContext.EventManager.Publish(new ItemInstanceSelectedEvent(gameContext.InventoryManager.ItemInstancesInInventory[0]));
 
 foreach (var partymember in gameContext.PartymemberManager.DeadPartymemberInstances)
 {
@@ -90,5 +91,18 @@ Console.WriteLine("Looting Treasure Chest:");
 dungeonEntityFactory.CreateLootInstance(LootType.TreasureChest);
 gameContext.EventManager.Publish(new PartyMemberInstanceSelectedEvent(gameContext.PartymemberManager.ActivePartymemberInstances[0]));
 gameContext.EventManager.Publish(new LootInstanceSelectedEvent(gameContext.DungeonManager.LootInstances[0]));
+Console.WriteLine("");
+
+foreach (var item in gameContext.InventoryManager.ItemInstancesInInventory)
+{
+    Console.WriteLine($"Item in Inventory: {item.ItemData.ItemType}");
+}
 Console.WriteLine("-------------------------------------------------------------------------------------------------------");
+#endregion
+
+#region HeroCreation
+Console.WriteLine($"Hero creation:");
+heroFactory.CreateHeroBaseInstance("ArkanerSchwertmeister");
+
+Console.WriteLine($"Current active Hero: {gameContext.HeroManager.BaseHeroInstance.HeroData.HeroId}");
 #endregion

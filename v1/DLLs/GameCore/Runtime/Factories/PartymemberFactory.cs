@@ -3,9 +3,9 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using GameCore.Core.Abilities.AttackAbility;
-using GameCore.Core.Partymember;
 using GameCore.Runtime.Instances;
 using GameCore.Runtime.Events.Creation;
+using GameCore.Core;
 
 namespace GameCore.Runtime.Factories
 {

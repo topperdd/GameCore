@@ -2,7 +2,7 @@
 using GameCore.Core.Abilities.AttackAbility;
 using GameCore.Core.Abilities.Effects;
 
-namespace GameCore.Runtime.Instances
+namespace GameCore.Runtime.Instances.Abilities
 {
     public class AttackAbilityInstance : IAttackAbility
     {

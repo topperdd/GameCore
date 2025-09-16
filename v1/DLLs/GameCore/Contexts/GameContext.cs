@@ -8,6 +8,7 @@ namespace GameCore.Contexts
         public PartymemberManager PartymemberManager { get; private set; } 
         public DungeonManager DungeonManager { get; private set; }
         public InventoryManager InventoryManager { get; private set; } 
+        public HeroManager HeroManager { get; private set; }
 
 
         public GameContext()
@@ -16,6 +17,7 @@ namespace GameCore.Contexts
             PartymemberManager = new PartymemberManager(this);
             DungeonManager = new DungeonManager(this);
             InventoryManager = new InventoryManager(this);
+            HeroManager = new HeroManager(this);
         }
     }
 }

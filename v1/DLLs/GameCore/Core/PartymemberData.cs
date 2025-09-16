@@ -1,4 +1,4 @@
-﻿namespace GameCore.Core.Partymember
+﻿namespace GameCore.Core
 {
     public class PartymemberData
     {

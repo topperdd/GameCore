@@ -1,8 +1,8 @@
 ﻿using GameCore.Contexts;
+using GameCore.Core;
 using GameCore.Core.Abilities.AttackAbility;
 using GameCore.Core.Abilities.LootAbility;
 using GameCore.Core.Interfaces;
-using GameCore.Core.Partymember;
 using GameCore.Runtime.Events;
 
 namespace GameCore.Runtime.Instances
@@ -28,9 +28,9 @@ namespace GameCore.Runtime.Instances
         public void Revive()
         {
             IsDead = false;
+            Console.WriteLine($"{Data.Class} was revived!");
 
             _gameContext.EventManager.Publish(new PartymemberRevivedEvent(this));
-            Console.WriteLine($"{Data.Class} was revived!");
         }
     }
 }
