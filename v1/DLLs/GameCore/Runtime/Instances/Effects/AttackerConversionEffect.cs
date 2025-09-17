@@ -18,13 +18,11 @@ namespace GameCore.Runtime.Instances.Effects
         {
             foreach (var partyMember in effectContext.PartymemberToConvert)
             {
-                if (partyMember.Data.Class == EffectData.ConversionClass)
+                if (partyMember.Data.Class == EffectData.FromClass)
                 {
-                    Console.WriteLine($"Convert Partymember: {partyMember.Data.Class} to {EffectData.ConvertToClass}");
-
                     IAttackAbility newAbility = null;
 
-                    switch (EffectData.ConvertToClass)
+                    switch (EffectData.ToClass)
                     {
                         case PartymemberClass.Warrior:
                             newAbility = effectContext.GameContext.AbilityFactory.CreateAttackAbilityInstance("AttackAllGoblins");
@@ -34,7 +32,13 @@ namespace GameCore.Runtime.Instances.Effects
                             break;
                     }
 
-                    partyMember.AttackAbilities.Add(newAbility);
+                    var abilityVorhanden = partyMember.AttackAbilities.Any(a => a.AbilityId == newAbility.AbilityId);
+
+                    if (!abilityVorhanden)
+                    {
+                        partyMember.AttackAbilities.Add(newAbility);
+
+                    }
                 }
             }
         }

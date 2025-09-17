@@ -7,7 +7,7 @@ using GameCore.Runtime.Events;
 
 namespace GameCore.Runtime.Instances
 {
-    public class PartymemberInstance : IReviveable
+    public class PartymemberInstance : IReviveable, IAttacker, ILooter
     {
         private GameContext _gameContext { get; set; }
 

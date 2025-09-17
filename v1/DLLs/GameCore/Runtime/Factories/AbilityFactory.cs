@@ -46,9 +46,17 @@ namespace GameCore.Runtime.Factories
 
         internal ILootAbility CreateLootAbilityInstance(string abilityId)
         {
-            var abilityData = _lootAbilityData.FirstOrDefault(a => a.AbilityId == abilityId);
+            if (abilityId != null)
+            {
+                var abilityData = _lootAbilityData.FirstOrDefault(a => a.AbilityId == abilityId);
 
-            return new LootAbilityInstance(abilityData);
+                return new LootAbilityInstance(abilityData);
+            }
+            else
+            {
+                return null;
+            }
+
         }
 
 

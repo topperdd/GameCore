@@ -21,7 +21,7 @@ public class CombatTests : TestBase
         var initialHealth = monster.CurrentHealth;
 
         // Act
-        GameContext.EventManager.Publish(new HeroInstanceSelectedEvent(GameContext.HeroManager.BaseHeroInstance));
+        GameContext.EventManager.Publish(new HeroInstanceSelectedEvent(GameContext.HeroManager.HeroInstance));
         GameContext.EventManager.Publish(new MonsterInstanceSelectedEvent(monster));
 
         // Assert

@@ -2,6 +2,7 @@
 using GameCore.Contexts;
 using GameCore.Core.Abilities.AttackAbility;
 using GameCore.Core.Interfaces;
+using GameCore.Runtime.Events;
 using GameCore.Runtime.Events.Combat;
 using GameCore.Runtime.Events.Selection;
 using GameCore.Runtime.Instances;
@@ -13,7 +14,6 @@ namespace GameCore.Runtime.Managers
         public PartymemberInstance PartymemberInstance { get; private set; } = null!;
         public HeroInstance HeroInstance { get; private set; } = null!;
         public List<MonsterInstance> MonsterInstances { get; private set; } = new List<MonsterInstance>();
-
 
         private GameContext _gameContext;
 
@@ -35,15 +35,28 @@ namespace GameCore.Runtime.Managers
 
         private void OnLootInstanceSelected(LootInstanceSelectedEvent e)
         {
+            ILooter looter = null!;
+
             if (PartymemberInstance != null)
             {
-                var lootCtx = new LootContext();
-
-                lootCtx.LootInstance = e.LootInstance;
-                lootCtx.PartymemberInstance = PartymemberInstance;
-
-                PartymemberInstance.LootAbility.ExecuteAbility(lootCtx);
+                looter = PartymemberInstance;
             }
+
+            if (HeroInstance != null)
+            {
+                looter = HeroInstance;
+            }
+
+            _gameContext.EventManager.Publish(new LootingStartedEvent(e.LootInstance, looter));
+
+            ResetSelection();
+        }
+
+        private void ResetSelection()
+        {
+            PartymemberInstance = null!;
+            HeroInstance = null!;
+            MonsterInstances.Clear();
         }
 
         private void OnItemInstanceSelected(ItemInstanceSelectedEvent e)
@@ -76,27 +89,27 @@ namespace GameCore.Runtime.Managers
 
                 item.Use(effectCtx);
 
-                PartymemberInstance = null!;
+                ResetSelection();
             }
         }
 
         private void OnMonsterInstanceSelected(MonsterInstanceSelectedEvent e)
         {
-            var attacks = new List<IAttackAbility>();
+            IAttacker attacker = null!;
 
             if (PartymemberInstance != null)
             {
-                attacks = PartymemberInstance.AttackAbilities;
+                attacker = PartymemberInstance;
             }
 
             if (HeroInstance != null)
             {
-                attacks = HeroInstance.AttackAbilities;
+                attacker = HeroInstance;
             }
 
             var monsterType = e.MonsterInstance.Data.MonsterType;
 
-            var attack = attacks.Find(attack => attack.MonsterToKill == monsterType);
+            var attack = attacker.AttackAbilities.Find(attack => attack.MonsterToKill == monsterType);
 
             if (attack != null)
             {
@@ -104,26 +117,23 @@ namespace GameCore.Runtime.Managers
             }
             else
             {
-                attack = attacks.Where(q => q.AbilityId == "AttackOneMonster").FirstOrDefault();
+                attack = attacker.AttackAbilities.Where(q => q.AbilityId == "AttackOneMonster").FirstOrDefault();
 
                 MonsterInstances = new List<MonsterInstance> { e.MonsterInstance };
             }
 
-            //Console.WriteLine($"PartymemberInstance: {PartymemberInstance.Data.Class.ToString()} is targeting MonsterType: {monsterType}");
-
             var combatContext = new CombatContext();
 
             combatContext.MonsterInstances = MonsterInstances.OfType<IDamageable>().ToList();
-            combatContext.PartymemberInstance = PartymemberInstance;
+
+            combatContext.Attacker = attacker;
             combatContext.AttackAbility = attack;
-            combatContext.HeroInstance = HeroInstance;
 
             _gameContext.EventManager.Publish(new CombatStartedEvent(combatContext));
 
             Console.WriteLine("");
 
-            PartymemberInstance = null!;
-            HeroInstance = null!;
+            ResetSelection();
         }
 
         private List<MonsterInstance> GetAllMonstersOfTheSameType(MonsterType monsterType)

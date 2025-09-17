@@ -21,7 +21,7 @@ namespace GameTests
         }
         protected GameContext GameContext { get; }
         protected TargetSelectionManager TargetSelectionManager { get; }
-        protected CombatResolveManager CombatResolveManager { get; }
+        protected AbilityResolveManager CombatResolveManager { get; }
         protected PartymemberFactory PartymemberFactory { get; }
         protected ItemFactory ItemFactory { get; }
         protected HeroFactory HeroFactory { get; }
@@ -31,7 +31,7 @@ namespace GameTests
         {
             GameContext = new GameContext();
             TargetSelectionManager = new TargetSelectionManager(GameContext);
-            CombatResolveManager = new CombatResolveManager(GameContext);
+            CombatResolveManager = new AbilityResolveManager(GameContext);
 
             PartymemberFactory = new PartymemberFactory(GameContext);
             ItemFactory = new ItemFactory(GameContext);

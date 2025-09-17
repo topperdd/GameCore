@@ -23,7 +23,6 @@ namespace GameCore.Runtime.Factories
 
         internal IEffect CreateEffectInstance(string effectId)
         {
-   
             var data = GetEffectData<EffectData>(effectId);
 
             return effectId switch
@@ -31,17 +30,23 @@ namespace GameCore.Runtime.Factories
                 "Damage" => new KillMonsterEffect((DamageEffectData)data),
                 "RevivePartymember" => new ReviveEffect((ReviveEffectData)data),
                 "MageToWarriorAttackerConversion" => new AttackerConversionEffect((AttackerConversionEffectData)data),
+                "WarriorToMageAttackerConversion" => new AttackerConversionEffect((AttackerConversionEffectData)data),
+                "RemoveAllMonsters" => new RemoveAllMonstersEffect((RemoveAllMonstersData)data),
+                "RemoveAllLoot" => new RemoveAllLootEffect((RemoveAllLootData)data),
                 _ => throw new ArgumentException($"Unknown effect: {effectId}")
             };
         }
 
-        internal List<IEffect> CreatePassiveEffects(List<string> passiveEffectIds)
+        internal List<IEffect> CreateEffects(List<string> effectIds)
         {
-            var effects = new List<IEffect>();  
+            var effects = new List<IEffect>();
 
-            foreach (var passiveEffect in passiveEffectIds)
+            if (effectIds != null)
             {
-                effects.Add(CreateEffectInstance(passiveEffect));
+                foreach (var effect in effectIds)
+                {
+                    effects.Add(CreateEffectInstance(effect));
+                }
             }
 
             return effects;
@@ -64,11 +69,15 @@ namespace GameCore.Runtime.Factories
             foreach (var element in doc.RootElement.EnumerateArray())
             {
                 var type = element.GetProperty("EffectId").GetString();
+
                 EffectData effect = type switch
                 {
                     "Damage" => JsonSerializer.Deserialize<DamageEffectData>(element.GetRawText(), options),
                     "RevivePartymember" => JsonSerializer.Deserialize<ReviveEffectData>(element.GetRawText(), options),
                     "MageToWarriorAttackerConversion" => JsonSerializer.Deserialize<AttackerConversionEffectData>(element.GetRawText(), options),
+                    "WarriorToMageAttackerConversion" => JsonSerializer.Deserialize<AttackerConversionEffectData>(element.GetRawText(), options),
+                    "RemoveAllMonsters" => JsonSerializer.Deserialize<RemoveAllMonstersData>(element.GetRawText(), options),
+                    "RemoveAllLoot" => JsonSerializer.Deserialize<RemoveAllLootData>(element.GetRawText(), options),
                     _ => throw new ArgumentException($"Unknown effect id: {type}")
                 };
 
@@ -76,7 +85,7 @@ namespace GameCore.Runtime.Factories
             }
         }
 
-        public T GetEffectData<T>(string effectId) where T : EffectData
+        private T GetEffectData<T>(string effectId) where T : EffectData
         {
             return _effectData[effectId] as T;
         }

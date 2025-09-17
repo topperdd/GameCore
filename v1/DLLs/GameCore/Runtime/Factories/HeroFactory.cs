@@ -30,9 +30,10 @@ namespace GameCore.Runtime.Factories
 
             var attackAbilities = GenerateAttackAbilities(heroBaseData);
             var lootAbility = _abilityFactory.CreateLootAbilityInstance(heroBaseData.LootAbilityId);
-            var passiveEffects = _effectFactory.CreatePassiveEffects(heroBaseData.PassiveEffectIds);
+            var activeEffects = _effectFactory.CreateEffects(heroBaseData.ActiveEffectIds);
+            var passiveEffects = _effectFactory.CreateEffects(heroBaseData.PassiveEffectIds);
 
-            var heroBaseInstance = new HeroInstance(heroBaseData, attackAbilities, lootAbility, passiveEffects, _gameContext);
+            var heroBaseInstance = new HeroInstance(heroBaseData, attackAbilities, lootAbility, passiveEffects, activeEffects, _gameContext);
 
             _gameContext.EventManager.Publish(new BaseHeroCreatedEvent(heroBaseInstance));
         }
@@ -41,10 +42,13 @@ namespace GameCore.Runtime.Factories
         {
             var attackAbilities = new List<IAttackAbility>();
 
-            foreach (var abilityId in heroBaseData.AttackAbilityIds)
+            if (heroBaseData.AttackAbilityIds != null)
             {
-                var newAbility = _abilityFactory.CreateAttackAbilityInstance(abilityId);
-                attackAbilities.Add(newAbility);
+                foreach (var abilityId in heroBaseData.AttackAbilityIds)
+                {
+                    var newAbility = _abilityFactory.CreateAttackAbilityInstance(abilityId);
+                    attackAbilities.Add(newAbility);
+                }
             }
 
             return attackAbilities;
@@ -60,7 +64,7 @@ namespace GameCore.Runtime.Factories
                 case HeroType.Base:
                     path = Path.Combine("Resources", "Heroes", "Base");
                     break;
-                case HeroType.LevelUp:
+                case HeroType.Ascended:
                     break;
             }
 

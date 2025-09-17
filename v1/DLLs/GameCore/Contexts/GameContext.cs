@@ -10,6 +10,7 @@ namespace GameCore.Contexts
         public DungeonManager DungeonManager { get; private set; }
         public InventoryManager InventoryManager { get; private set; } 
         public HeroManager HeroManager { get; private set; }
+        public HeroPassiveEffectsManager HeroPassiveEffectsManager { get; private set; }
 
 
         public AbilityFactory AbilityFactory { get; private set; }
@@ -21,6 +22,7 @@ namespace GameCore.Contexts
             DungeonManager = new DungeonManager(this);
             InventoryManager = new InventoryManager(this);
             HeroManager = new HeroManager(this);
+            HeroPassiveEffectsManager = new HeroPassiveEffectsManager(this);
 
             AbilityFactory = new AbilityFactory(this);
         }

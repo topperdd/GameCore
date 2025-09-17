@@ -19,7 +19,8 @@ public enum MonsterType
 {
     Goblin,
     Ooze,
-    Any
+    Any,
+    All
 }
 
 public enum DungeonEntityType

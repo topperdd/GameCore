@@ -1,0 +1,13 @@
+﻿{
+  "HeroId": "Kampfmagier",
+  "AcendsToHeroId": null,
+  "HeroType": "Ascended",
+  "ExperienceToAscend": null,
+  "AttackAbilityIds": null,
+  "LootAbilityId": null,
+  "ActiveEffectIds": [ "RemoveAllMonsters", "RemoveAllLoot" ],
+  "PassiveEffectIds": [
+    "MageToWarriorAttackerConversion",
+    "WarriorToMageAttackerConversion"
+  ]
+}

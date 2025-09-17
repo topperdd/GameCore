@@ -20,6 +20,19 @@ namespace GameCore.Runtime.Managers
             _gameContext.EventManager.Subscribe<MonsterDiedEvent>(OnMonsterDied);
 
             _gameContext.EventManager.Subscribe<LootCreatedEvent>(OnLootCreated);
+
+            _gameContext.EventManager.Subscribe<RemoveAllMonstersEvent>(OnRemoveAllMonsters);
+            _gameContext.EventManager.Subscribe<RemoveAllLootEvent>(OnRemoveAllLoot);
+        }
+
+        private void OnRemoveAllLoot(RemoveAllLootEvent e)
+        {
+            LootInstances.Clear();
+        }
+
+        private void OnRemoveAllMonsters(RemoveAllMonstersEvent e)
+        {
+            MonsterInstances.Clear();
         }
 
         private void OnLootCreated(LootCreatedEvent e)

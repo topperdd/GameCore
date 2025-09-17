@@ -6,9 +6,8 @@ namespace GameCore.Contexts
 {
     public class CombatContext
     {
-        public PartymemberInstance PartymemberInstance { get; set; } = null!;
-        public HeroInstance HeroInstance { get; set; } = null!;
+        public IAttacker Attacker { get; set; } = null!;
         public List<IDamageable> MonsterInstances { get; set; } = null!;
-        public IAttackAbility? AttackAbility { get; set; } = null;
+        public IAttackAbility AttackAbility { get; set; } = null;
     }
 }

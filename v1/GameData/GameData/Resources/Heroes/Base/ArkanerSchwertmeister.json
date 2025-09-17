@@ -1,7 +1,13 @@
 ﻿{
   "HeroId": "ArkanerSchwertmeister",
+  "AcendsToHeroId": "Kampfmagier",
   "HeroType": "Base",
+  "ExperienceToAscend": 5,
   "AttackAbilityIds": [ "AttackAllGoblins", "AttackAllOozes" ],
   "LootAbilityId": "LootTreasureChest",
-  "PassiveEffectIds": [ "MageToWarriorAttackerConversion" ]
+  "ActiveEffectIds": null,
+  "PassiveEffectIds": [
+    "MageToWarriorAttackerConversion",
+    "WarriorToMageAttackerConversion"
+  ]
 }

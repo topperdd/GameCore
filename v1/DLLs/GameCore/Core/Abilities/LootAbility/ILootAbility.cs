@@ -5,5 +5,6 @@ namespace GameCore.Core.Abilities.LootAbility
 {
     public interface ILootAbility : IAbility
     {
+
     }
 }

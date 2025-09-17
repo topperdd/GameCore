@@ -4,11 +4,26 @@
     "DamageAmount": 5
   },
   {
+    "EffectId": "RemoveAllMonsters"
+  },
+  {
+    "EffectId": "RemoveAllLoot"
+  },
+
+
+  {
     "EffectId": "RevivePartymember"
   },
+
+
   {
     "EffectId": "MageToWarriorAttackerConversion",
     "FromClass": "Mage",
     "ToClass": "Warrior"
+  },
+  {
+    "EffectId": "WarriorToMageAttackerConversion",
+    "FromClass": "Warrior",
+    "ToClass": "Mage"
   }
 ]

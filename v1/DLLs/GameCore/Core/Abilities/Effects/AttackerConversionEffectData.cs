@@ -2,7 +2,7 @@
 {
     public class AttackerConversionEffectData : EffectData
     {
-        public PartymemberClass ConvertToClass { get; set; }
-        public PartymemberClass ConversionClass { get; set; }
+        public PartymemberClass ToClass { get; set; }
+        public PartymemberClass FromClass { get; set; }
     }
 }
