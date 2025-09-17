@@ -32,6 +32,25 @@ Console.WriteLine($"Current active Hero: {gameContext.HeroManager.BaseHeroInstan
 #endregion
 
 
+#region HeroPassiveAbility
+foreach (var effect in gameContext.HeroManager.BaseHeroInstance.PassiveEffects)
+{
+    effect.ApplyEffect(new EffectContext
+    {
+        GameContext = gameContext,
+        PartymemberToConvert = gameContext.PartymemberManager.ActivePartymemberInstances
+    });
+
+    effect.ApplyEffect(new EffectContext
+    {
+        GameContext = gameContext,
+        PartymemberToConvert = gameContext.PartymemberManager.ActivePartymemberInstances
+    });
+    Console.WriteLine($"Passive Hero Effect: {effect}");
+}
+#endregion
+
+
 foreach (var partymember in gameContext.PartymemberManager.ActivePartymemberInstances)
 {
     Console.WriteLine($"Partymember Class: {partymember.Data.Class.ToString()}");
@@ -47,9 +66,9 @@ foreach (var monster in gameContext.DungeonManager.MonsterInstances)
 }
 Console.WriteLine("");
 
-//gameContext.EventManager.Publish(new PartyMemberInstanceSelectedEvent(gameContext.PartymemberManager.ActivePartymemberInstances[1]));
-gameContext.EventManager.Publish(new HeroInstanceSelectedEvent(gameContext.HeroManager.BaseHeroInstance));
-gameContext.EventManager.Publish(new MonsterInstanceSelectedEvent(gameContext.DungeonManager.MonsterInstances[2]));
+gameContext.EventManager.Publish(new PartyMemberInstanceSelectedEvent(gameContext.PartymemberManager.ActivePartymemberInstances[1]));
+//gameContext.EventManager.Publish(new HeroInstanceSelectedEvent(gameContext.HeroManager.BaseHeroInstance));
+gameContext.EventManager.Publish(new MonsterInstanceSelectedEvent(gameContext.DungeonManager.MonsterInstances[0]));
 
 Console.WriteLine("After Fight:");
 foreach (var monster in gameContext.DungeonManager.MonsterInstances)

@@ -3,9 +3,11 @@ using GameCore.Runtime.Events.Selection;
 using GameCore.Runtime.Factories;
 using GameTests;
 using Xunit;
+using Xunit.Abstractions;
 
 public class CombatTests : TestBase
 {
+
     [Fact]
     public void Actor_Should_Damage_Monster()
     {
@@ -24,5 +26,7 @@ public class CombatTests : TestBase
 
         // Assert
         Assert.True(monster.CurrentHealth < initialHealth);
+
+        Console.WriteLine($"Monster health after attack: {monster.CurrentHealth}");
     }
 }

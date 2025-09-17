@@ -14,12 +14,14 @@ namespace GameCore.Runtime.Factories
         private List<HeroData> _heroBaseDataList = new List<HeroData>();
         private GameContext _gameContext { get; set; }
         private AbilityFactory _abilityFactory { get; set; }
+        private EffectFactory _effectFactory { get; set; }
 
         public HeroFactory(GameContext gameContext)
         {
             _heroBaseDataList = LoadResources<HeroData>(HeroType.Base);
             _gameContext = gameContext;
             _abilityFactory = new AbilityFactory(gameContext);
+            _effectFactory = new EffectFactory(gameContext);
         }
 
         public void CreateHeroBaseInstance(string heroBase)
@@ -28,8 +30,9 @@ namespace GameCore.Runtime.Factories
 
             var attackAbilities = GenerateAttackAbilities(heroBaseData);
             var lootAbility = _abilityFactory.CreateLootAbilityInstance(heroBaseData.LootAbilityId);
+            var passiveEffects = _effectFactory.CreatePassiveEffects(heroBaseData.PassiveEffectIds);
 
-            var heroBaseInstance = new HeroInstance(heroBaseData, attackAbilities, lootAbility, _gameContext);
+            var heroBaseInstance = new HeroInstance(heroBaseData, attackAbilities, lootAbility, passiveEffects, _gameContext);
 
             _gameContext.EventManager.Publish(new BaseHeroCreatedEvent(heroBaseInstance));
         }

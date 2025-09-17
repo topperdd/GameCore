@@ -1,5 +1,5 @@
 ﻿{
   "AbilityId": "AttackAllOozes",
   "MonsterTypeToKill": "Ooze",
-  "EffectIds": [ "KillMonsterEffect" ]
+  "EffectIds": [ "Damage" ]
 }

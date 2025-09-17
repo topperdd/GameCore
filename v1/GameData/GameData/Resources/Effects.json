@@ -1,0 +1,14 @@
+﻿[
+  {
+    "EffectId": "Damage",
+    "DamageAmount": 5
+  },
+  {
+    "EffectId": "RevivePartymember"
+  },
+  {
+    "EffectId": "MageToWarriorAttackerConversion",
+    "FromClass": "Mage",
+    "ToClass": "Warrior"
+  }
+]

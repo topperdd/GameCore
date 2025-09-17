@@ -4,6 +4,7 @@ using GameCore.Contexts;
 using GameCore.Core.Abilities.AttackAbility;
 using GameCore.Core.Abilities.Effects;
 using GameCore.Core.Abilities.LootAbility;
+using GameCore.Core.Interfaces;
 using GameCore.Runtime.Instances;
 using GameCore.Runtime.Instances.Abilities;
 using System.Text.Json;

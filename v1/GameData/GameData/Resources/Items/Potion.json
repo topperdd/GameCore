@@ -1,5 +1,5 @@
 ﻿{
   "ItemType": "Potion",
   "TargetType": "DeadPartyMember",
-  "EffectIds": [ "RevivePartymemberEffect" ]
+  "EffectIds": [ "RevivePartymember" ]
 }

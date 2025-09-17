@@ -2,5 +2,6 @@
   "HeroId": "ArkanerSchwertmeister",
   "HeroType": "Base",
   "AttackAbilityIds": [ "AttackAllGoblins", "AttackAllOozes" ],
-  "LootAbilityId": "LootTreasureChest"
+  "LootAbilityId": "LootTreasureChest",
+  "PassiveEffectIds": [ "MageToWarriorAttackerConversion" ]
 }

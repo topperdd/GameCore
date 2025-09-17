@@ -5,11 +5,11 @@ namespace GameCore.Runtime.Instances.Effects
 {
     public class ReviveEffect : IEffect
     {
-        public EffectData EffectData { get; private set; }
+        public ReviveEffectData Data { get; set; }
 
-        public ReviveEffect(EffectData effectData)
+        public ReviveEffect(ReviveEffectData data)
         {
-            EffectData = effectData;
+            Data = data;
         }
 
         public void ApplyEffect(EffectContext effectContext)

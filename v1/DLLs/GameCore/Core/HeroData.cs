@@ -8,6 +8,7 @@ namespace GameCore.Core
         public HeroType HeroType { get; set; }
         public List<string> AttackAbilityIds { get; set; } = new List<string>();
         public string LootAbilityId { get; set; } 
+        public List<string> PassiveEffectIds { get; set; } = new List<string>();
     }
 }
 public enum HeroType

@@ -1,21 +1,25 @@
 ﻿using GameCore.Contexts;
 using GameCore.Core.Abilities.Effects;
+using GameCore.Core.Interfaces;
 
 namespace GameCore.Runtime.Instances.Effects
 {
     public class KillMonsterEffect : IEffect
     {
-        public EffectData EffectData { get; private set; }
-        public KillMonsterEffect(EffectData effectData)
+        int damageValue = 1;
+
+        public DamageEffectData Data { get; set; }
+
+        public KillMonsterEffect(DamageEffectData data)
         {
-            EffectData = effectData;
+            Data = data;
         }
 
         public void ApplyEffect(EffectContext effectContext)
         {
             foreach (var monster in effectContext.DamageableTargets)
             {
-                monster.TakeDamage(EffectData.Value);
+                monster.TakeDamage(damageValue);
             }
         }
     }

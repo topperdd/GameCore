@@ -7,3 +7,9 @@ namespace GameCore.Core.Abilities.Effects
         void ApplyEffect(EffectContext effectContext);
     }
 }
+public enum EffectType
+{
+    KillMonster,
+    RevivePartymember,
+    AttackerConversion
+}

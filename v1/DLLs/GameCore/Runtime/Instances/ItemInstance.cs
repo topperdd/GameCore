@@ -8,6 +8,8 @@ namespace GameCore.Runtime.Instances
 {
     public class ItemInstance : IUseable
     {
+        private List<IEffect> effects;
+
         private GameContext _gameContext { get; set; }
 
         public ItemData ItemData { get; private set; }
@@ -20,6 +22,7 @@ namespace GameCore.Runtime.Instances
 
             _gameContext = gameContext;
         }
+
 
         public void Use(EffectContext effectContext)
         {

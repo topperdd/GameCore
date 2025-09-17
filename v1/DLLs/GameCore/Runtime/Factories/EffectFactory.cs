@@ -7,46 +7,49 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 
+
 namespace GameCore.Runtime.Factories
 {
     public class EffectFactory
     {
         private GameContext _gameContext;
-        private List<EffectData> _effectData = new();
+        private Dictionary<string, EffectData> _effectData = new();
 
         public EffectFactory(GameContext gameContext)
         {
             _gameContext = gameContext;
-            _effectData = LoadEffectResources();
+            LoadEffectResources();
         }
 
         internal IEffect CreateEffectInstance(string effectId)
         {
-            var effectData = _effectData.FirstOrDefault(a => a.EffectId == effectId);
+   
+            var data = GetEffectData<EffectData>(effectId);
 
-            IEffect newEffect = null;
-
-            switch (effectData.Type)
+            return effectId switch
             {
-                case EffectType.Damage:
-                    newEffect = new KillMonsterEffect(effectData);
-                    break;
-
-                case EffectType.RevivePartymember:
-                    newEffect = new ReviveEffect(effectData);
-                    break;
-            }
-
-            return newEffect;
+                "Damage" => new KillMonsterEffect((DamageEffectData)data),
+                "RevivePartymember" => new ReviveEffect((ReviveEffectData)data),
+                "MageToWarriorAttackerConversion" => new AttackerConversionEffect((AttackerConversionEffectData)data),
+                _ => throw new ArgumentException($"Unknown effect: {effectId}")
+            };
         }
 
-        private List<EffectData> LoadEffectResources()
+        internal List<IEffect> CreatePassiveEffects(List<string> passiveEffectIds)
         {
-            var result = new List<EffectData>();
+            var effects = new List<IEffect>();  
 
-            string path = Path.Combine("Resources", "Effects");
+            foreach (var passiveEffect in passiveEffectIds)
+            {
+                effects.Add(CreateEffectInstance(passiveEffect));
+            }
 
-            var jsonFiles = Directory.GetFiles(path, "*.json");
+            return effects;
+        }
+
+        private void LoadEffectResources()
+        {
+            string path = Path.Combine("Resources", "Effects.json");
 
             var options = new JsonSerializerOptions
             {
@@ -54,16 +57,28 @@ namespace GameCore.Runtime.Factories
                 PropertyNameCaseInsensitive = true
             };
 
-            foreach (var effect in jsonFiles)
+            string json = File.ReadAllText(path);
+
+            // Erst mal "roh" als JsonDocument laden
+            using var doc = JsonDocument.Parse(json);
+            foreach (var element in doc.RootElement.EnumerateArray())
             {
-                string json = File.ReadAllText(effect);
+                var type = element.GetProperty("EffectId").GetString();
+                EffectData effect = type switch
+                {
+                    "Damage" => JsonSerializer.Deserialize<DamageEffectData>(element.GetRawText(), options),
+                    "RevivePartymember" => JsonSerializer.Deserialize<ReviveEffectData>(element.GetRawText(), options),
+                    "MageToWarriorAttackerConversion" => JsonSerializer.Deserialize<AttackerConversionEffectData>(element.GetRawText(), options),
+                    _ => throw new ArgumentException($"Unknown effect id: {type}")
+                };
 
-                EffectData effectData = JsonSerializer.Deserialize<EffectData>(json, options);
-
-                result.Add(effectData);
+                _effectData[effect.EffectId] = effect;
             }
+        }
 
-            return result;
+        public T GetEffectData<T>(string effectId) where T : EffectData
+        {
+            return _effectData[effectId] as T;
         }
     }
 }

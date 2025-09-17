@@ -1,4 +1,5 @@
-﻿using GameCore.Runtime.Managers;
+﻿using GameCore.Runtime.Factories;
+using GameCore.Runtime.Managers;
 
 namespace GameCore.Contexts
 {
@@ -11,6 +12,8 @@ namespace GameCore.Contexts
         public HeroManager HeroManager { get; private set; }
 
 
+        public AbilityFactory AbilityFactory { get; private set; }
+
         public GameContext()
         {
             EventManager = new EventManager();
@@ -18,6 +21,8 @@ namespace GameCore.Contexts
             DungeonManager = new DungeonManager(this);
             InventoryManager = new InventoryManager(this);
             HeroManager = new HeroManager(this);
+
+            AbilityFactory = new AbilityFactory(this);
         }
     }
 }

@@ -4,7 +4,7 @@
     {
         public ItemType ItemType { get; set; }
         public TargetType TargetType { get; set; }
-        public List<string> EffectIds { get; set; } = new List<string>();
+        public List<string  > EffectIds { get; set; } = new List<string>();
     }
 }
 
