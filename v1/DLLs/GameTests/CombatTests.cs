@@ -14,7 +14,7 @@ public class CombatTests : TestBase
         // Arrange
         PartymemberFactory.CreatePartymemberInstance(PartymemberClass.Warrior);
         DungeonEntityFactory.CreateMonsterInstance(MonsterType.Goblin);
-        HeroFactory.CreateHeroBaseInstance("ArkanerSchwertmeister");
+        HeroFactory.CreateHeroInstance("ArkanerSchwertmeister");
 
         var hero = GameContext.PartymemberManager.ActivePartymemberInstances[0];
         var monster = GameContext.DungeonManager.MonsterInstances[0];

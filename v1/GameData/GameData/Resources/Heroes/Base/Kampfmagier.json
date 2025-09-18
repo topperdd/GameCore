@@ -2,7 +2,7 @@
   "HeroId": "Kampfmagier",
   "AcendsToHeroId": null,
   "HeroType": "Ascended",
-  "ExperienceToAscend": null,
+  "ExperienceToAscend": 0,
   "AttackAbilityIds": null,
   "LootAbilityId": null,
   "ActiveEffectIds": [ "RemoveAllMonsters", "RemoveAllLoot" ],

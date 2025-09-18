@@ -13,14 +13,14 @@ namespace GameCore.Runtime.Managers
         {
             _gameContext = gameContext;
 
-            _gameContext.EventManager.Subscribe<BaseHeroCreatedEvent>(OnBaseHeroCreated);
+            _gameContext.EventManager.Subscribe<HeroCreatedEvent>(OnBaseHeroCreated);
             _gameContext.EventManager.Subscribe<PartymemberCreatedEvent>(OnPartymemberCreated);
 
         }
 
-        private void OnBaseHeroCreated(BaseHeroCreatedEvent e)
+        private void OnBaseHeroCreated(HeroCreatedEvent e)
         {
-            _heroInstance = e.BaseHeroInstance;
+            _heroInstance = e.HeroInstance;
         }
 
         private void OnPartymemberCreated(PartymemberCreatedEvent e)

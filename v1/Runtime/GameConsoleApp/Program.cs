@@ -17,8 +17,8 @@ var heroFactory = new HeroFactory(gameContext);
 
 #region HeroCreation
 Console.WriteLine($"Hero creation:");
-heroFactory.CreateHeroBaseInstance("ArkanerSchwertmeister");
-gameContext.EventManager.Publish(new HeroAscendedEvent(gameContext.HeroManager.HeroInstance));
+heroFactory.CreateHeroInstance("ArkanerSchwertmeister");
+//gameContext.EventManager.Publish(new HeroAscendedEvent(gameContext.HeroManager.HeroInstance));
 //heroFactory.CreateHeroBaseInstance("Kampfmagier");
 
 Console.WriteLine($"Current active Hero: {gameContext.HeroManager.HeroInstance.HeroData.HeroId}");
@@ -35,18 +35,18 @@ dungeonEntityFactory.CreateMonsterInstance(MonsterType.Ooze);
 dungeonEntityFactory.CreateMonsterInstance(MonsterType.Ooze);
 
 
-//#region HeroPassiveAbility
-//foreach (var effect in gameContext.HeroManager.HeroInstance.PassiveEffects)
-//{
-//    effect.ApplyEffect(new EffectContext
-//    {
-//        GameContext = gameContext,
-//        PartymemberToConvert = gameContext.PartymemberManager.ActivePartymemberInstances
-//    });
+#region HeroPassiveAbility
+foreach (var effect in gameContext.HeroManager.HeroInstance.PassiveEffects)
+{
+    effect.ApplyEffect(new EffectContext
+    {
+        GameContext = gameContext,
+        PartymemberToConvert = gameContext.PartymemberManager.ActivePartymemberInstances
+    });
 
-//    Console.WriteLine($"Passive Hero Effect: {effect}");
-//}
-//#endregion
+    Console.WriteLine($"Passive Hero Effect: {effect}");
+}
+#endregion
 
 #region HeroActiveAbility
 gameContext.EventManager.Publish(new HeroActiveAbilityUsedEvent(gameContext.HeroManager.HeroInstance));
@@ -54,6 +54,14 @@ Console.WriteLine(gameContext.DungeonManager.MonsterInstances.Count);
 Console.WriteLine(gameContext.DungeonManager.LootInstances.Count);
 #endregion
 
+
+#region HeroGainXp
+gameContext.HeroManager.HeroInstance.GainXp(5);
+
+Console.WriteLine($"Current active Hero: {gameContext.HeroManager.HeroInstance.HeroData.HeroId}");
+Console.WriteLine();
+
+#endregion
 
 foreach (var partymember in gameContext.PartymemberManager.ActivePartymemberInstances)
 {
@@ -99,7 +107,7 @@ Console.WriteLine("-------------------------------------------------------------
 
 //#region ItemUsage
 //Console.WriteLine("Using Item:");
-itemFactory.CreateItemInstance(ItemType.Potion);
+//itemFactory.CreateItemInstance(ItemType.Potion);
 
 //gameContext.EventManager.Publish(new PartyMemberInstanceSelectedEvent(gameContext.PartymemberManager.ActivePartymemberInstances[0]));
 //gameContext.EventManager.Publish(new ItemInstanceSelectedEvent(gameContext.InventoryManager.ItemInstancesInInventory[0]));

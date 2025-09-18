@@ -4,13 +4,16 @@ using GameCore.Core.Abilities.AttackAbility;
 using GameCore.Core.Abilities.Effects;
 using GameCore.Core.Abilities.LootAbility;
 using GameCore.Core.Interfaces;
+using GameCore.Runtime.Events;
 
 namespace GameCore.Runtime.Instances
 {
-    public class HeroInstance : IAttacker, ILooter
+    public class HeroInstance : IAttacker, ILooter, IXpGainer
     {
         public HeroData HeroData { get; private set; }
-        private GameContext _gameContext { get; set; }  
+        private GameContext _gameContext { get; set; }
+
+        public int CurrentXp { get; private set; } = 0;
 
         public List<IAttackAbility> AttackAbilities { get; set; }
         public ILootAbility LootAbility { get; set; }
@@ -19,13 +22,20 @@ namespace GameCore.Runtime.Instances
 
         public HeroInstance(HeroData heroData, List<IAttackAbility> attackAbilities, ILootAbility lootAbility, List<IEffect> passiveEffects, List<IEffect> activeEffects, GameContext gameContext)
         {
-            gameContext = _gameContext;
+            _gameContext = gameContext;
 
             HeroData = heroData;
             AttackAbilities= attackAbilities;
             LootAbility = lootAbility;
             ActiveEffects = activeEffects;
             PassiveEffects = passiveEffects;
+        }
+
+        public void GainXp(int amount)
+        {
+            CurrentXp+= amount;
+
+            _gameContext.EventManager.Publish(new HeroGainedXpEvent(amount));
         }
     }
 }

@@ -11,31 +11,32 @@ namespace GameCore.Runtime.Factories
 {
     public class HeroFactory
     {
-        private List<HeroData> _heroBaseDataList = new List<HeroData>();
+        private List<HeroData> _heroDataList = new List<HeroData>();
         private GameContext _gameContext { get; set; }
         private AbilityFactory _abilityFactory { get; set; }
         private EffectFactory _effectFactory { get; set; }
 
         public HeroFactory(GameContext gameContext)
         {
-            _heroBaseDataList = LoadResources<HeroData>(HeroType.Base);
+            _heroDataList = LoadResources<HeroData>(HeroType.Base);
             _gameContext = gameContext;
+
             _abilityFactory = new AbilityFactory(gameContext);
             _effectFactory = new EffectFactory(gameContext);
         }
 
-        public void CreateHeroBaseInstance(string heroBase)
+        public void CreateHeroInstance(string heroId)
         {
-            var heroBaseData = _heroBaseDataList.FirstOrDefault(p => p.HeroId == heroBase);
+            var heroData = _heroDataList.FirstOrDefault(p => p.HeroId == heroId);
 
-            var attackAbilities = GenerateAttackAbilities(heroBaseData);
-            var lootAbility = _abilityFactory.CreateLootAbilityInstance(heroBaseData.LootAbilityId);
-            var activeEffects = _effectFactory.CreateEffects(heroBaseData.ActiveEffectIds);
-            var passiveEffects = _effectFactory.CreateEffects(heroBaseData.PassiveEffectIds);
+            var attackAbilities = GenerateAttackAbilities(heroData);
+            var lootAbility = _abilityFactory.CreateLootAbilityInstance(heroData.LootAbilityId);
+            var activeEffects = _effectFactory.CreateEffects(heroData.ActiveEffectIds);
+            var passiveEffects = _effectFactory.CreateEffects(heroData.PassiveEffectIds);
 
-            var heroBaseInstance = new HeroInstance(heroBaseData, attackAbilities, lootAbility, passiveEffects, activeEffects, _gameContext);
+            var heroInstance = new HeroInstance(heroData, attackAbilities, lootAbility, passiveEffects, activeEffects, _gameContext);
 
-            _gameContext.EventManager.Publish(new BaseHeroCreatedEvent(heroBaseInstance));
+            _gameContext.EventManager.Publish(new HeroCreatedEvent(heroInstance));
         }
 
         private List<IAttackAbility> GenerateAttackAbilities(HeroData heroBaseData)
