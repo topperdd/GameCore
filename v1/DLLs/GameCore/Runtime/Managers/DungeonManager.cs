@@ -1,6 +1,7 @@
 ﻿using GameCore.Contexts;
 using GameCore.Runtime.Events.Combat;
 using GameCore.Runtime.Events.Creation;
+using GameCore.Runtime.Events.Loot;
 using GameCore.Runtime.Instances;
 
 namespace GameCore.Runtime.Managers
@@ -23,6 +24,13 @@ namespace GameCore.Runtime.Managers
 
             _gameContext.EventManager.Subscribe<RemoveAllMonstersEvent>(OnRemoveAllMonsters);
             _gameContext.EventManager.Subscribe<RemoveAllLootEvent>(OnRemoveAllLoot);
+
+            _gameContext.EventManager.Subscribe<LootingFinishedEvent>(OnLootingFinished);
+        }
+
+        private void OnLootingFinished(LootingFinishedEvent e)
+        {
+            LootInstances.Remove(e.LootInstance);
         }
 
         private void OnRemoveAllLoot(RemoveAllLootEvent e)

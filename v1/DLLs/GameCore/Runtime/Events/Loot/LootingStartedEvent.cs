@@ -2,7 +2,7 @@
 using GameCore.Core.Interfaces;
 using GameCore.Runtime.Instances;
 
-namespace GameCore.Runtime.Events
+namespace GameCore.Runtime.Events.Loot
 {
     public class LootingStartedEvent
     {

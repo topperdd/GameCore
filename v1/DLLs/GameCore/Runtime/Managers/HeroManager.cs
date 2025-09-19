@@ -40,7 +40,7 @@ namespace GameCore.Runtime.Managers
             }
         }
 
-        private void AscendHero()
+        public void AscendHero()
         {
             _heroFactory.CreateHeroInstance(HeroInstance.HeroData.AcendsToHeroId);
         }

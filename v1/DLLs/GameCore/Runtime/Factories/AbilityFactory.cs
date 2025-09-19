@@ -30,7 +30,7 @@ namespace GameCore.Runtime.Factories
             _lootAbilityData = LoadResources<LootAbilityData>("LootAbility");
         }
 
-        internal IAttackAbility CreateAttackAbilityInstance(string abilityId)
+        public IAttackAbility CreateAttackAbilityInstance(string abilityId)
         {
             var abilityData = _attackAbilityData.FirstOrDefault(a => a.AbilityId == abilityId);
 
@@ -44,7 +44,7 @@ namespace GameCore.Runtime.Factories
             return new AttackAbilityInstance(abilityData, effects);
         }
 
-        internal ILootAbility CreateLootAbilityInstance(string abilityId)
+        public ILootAbility CreateLootAbilityInstance(string abilityId)
         {
             if (abilityId != null)
             {

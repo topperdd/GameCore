@@ -4,6 +4,7 @@ using GameCore.Core.Abilities.AttackAbility;
 using GameCore.Core.Interfaces;
 using GameCore.Runtime.Events;
 using GameCore.Runtime.Events.Combat;
+using GameCore.Runtime.Events.Loot;
 using GameCore.Runtime.Events.Selection;
 using GameCore.Runtime.Instances;
 

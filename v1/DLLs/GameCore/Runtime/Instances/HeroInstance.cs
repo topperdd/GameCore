@@ -35,7 +35,11 @@ namespace GameCore.Runtime.Instances
         {
             CurrentXp+= amount;
 
-            _gameContext.EventManager.Publish(new HeroGainedXpEvent(amount));
+            if (CurrentXp >= 5)
+            {
+                _gameContext.HeroManager.AscendHero();
+
+            }
         }
     }
 }

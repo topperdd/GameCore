@@ -2,6 +2,7 @@
 using GameCore.Core.Interfaces;
 using GameCore.Runtime.Events;
 using GameCore.Runtime.Events.Combat;
+using GameCore.Runtime.Events.Loot;
 using GameCore.Runtime.Instances;
 
 namespace GameCore.Runtime.Managers
@@ -29,7 +30,7 @@ namespace GameCore.Runtime.Managers
             switch (e.Looter)
             {
                 case PartymemberInstance:
-                    _gameContext.EventManager.Publish(new PartymemberDiedEvent((PartymemberInstance)_combatContext.Attacker));
+                    _gameContext.EventManager.Publish(new PartymemberDiedEvent((PartymemberInstance)lootCtx.Looter));
                     Console.WriteLine("Partymember hat gelooted.");
                     break;
 
@@ -37,6 +38,8 @@ namespace GameCore.Runtime.Managers
                     Console.WriteLine("Hero hat gelooted.");
                     break;
             }
+
+            _gameContext.EventManager.Publish(new LootingFinishedEvent(lootCtx.LootInstance));
         }
 
         private void OnCombatStarted(CombatStartedEvent e)

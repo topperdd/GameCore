@@ -1,5 +1,6 @@
 using GameCore.Contexts;
 using GameCore.Runtime.Factories;
+using GameCore.Runtime.Instances;
 using GameCore.Runtime.Managers;
 using Microsoft.VisualStudio.TestPlatform.Utilities;
 using Xunit.Abstractions;
@@ -8,17 +9,13 @@ namespace GameTests
 {
     public abstract class TestBase
     {
-        protected static ITestOutputHelper Output { get; private set; }
-
-        protected void SetOutputHelper(ITestOutputHelper output)
-        {
-            Output = output;
-        }
+        private readonly ITestOutputHelper _output;
 
         protected void Log(string message)
         {
-            Output?.WriteLine(message);
+            _output.WriteLine(message);
         }
+
         protected GameContext GameContext { get; }
         protected TargetSelectionManager TargetSelectionManager { get; }
         protected AbilityResolveManager CombatResolveManager { get; }
@@ -27,7 +24,7 @@ namespace GameTests
         protected HeroFactory HeroFactory { get; }
         protected DungeonEntityFactory DungeonEntityFactory { get; }
 
-        protected TestBase()
+        protected TestBase(ITestOutputHelper output)
         {
             GameContext = new GameContext();
             TargetSelectionManager = new TargetSelectionManager(GameContext);
@@ -37,6 +34,22 @@ namespace GameTests
             ItemFactory = new ItemFactory(GameContext);
             HeroFactory = new HeroFactory(GameContext);
             DungeonEntityFactory = new DungeonEntityFactory(GameContext);
+
+            _output = output;
+
+        }
+
+        protected void SetupFightScenario()
+        {
+            HeroFactory.CreateHeroInstance("ArkanerSchwertmeister");
+
+            PartymemberFactory.CreatePartymemberInstance(PartymemberClass.Warrior);
+            PartymemberFactory.CreatePartymemberInstance(PartymemberClass.Mage);
+
+            DungeonEntityFactory.CreateMonsterInstance(MonsterType.Goblin);
+            DungeonEntityFactory.CreateMonsterInstance(MonsterType.Goblin);
+            DungeonEntityFactory.CreateMonsterInstance(MonsterType.Ooze);
+            DungeonEntityFactory.CreateMonsterInstance(MonsterType.Ooze);
         }
     }
 }
