@@ -41,15 +41,47 @@ namespace GameTests
 
         protected void SetupFightScenario()
         {
-            HeroFactory.CreateHeroInstance("ArkanerSchwertmeister");
+            SetupHero();
+            SetupPartymembers();
+            SetupMonsters(MonsterType.Any, 4);
+        }
 
+        public void SetupMonsters(MonsterType monsterType, int amount)
+        {
+            var type = monsterType;
+
+            for (int i = 0; i < amount; i++)
+            {
+                if (monsterType == MonsterType.Any)
+                {
+                    var types = Enum.GetValues(typeof(MonsterType))
+                                    .Cast<MonsterType>()
+                                    .Where(t => t != MonsterType.Any)
+                                    .ToArray();
+
+                    var rnd = new Random();
+                    type = types[rnd.Next(types.Length)];
+                }
+
+                Log("creating of type:" + type);
+                DungeonEntityFactory.CreateMonsterInstance(type);
+            }
+        }
+
+        public void SetupHero()
+        {
+            HeroFactory.CreateHeroInstance("ArkanerSchwertmeister");
+        }
+
+        public void SetupPartymembers()
+        {
             PartymemberFactory.CreatePartymemberInstance(PartymemberClass.Warrior);
             PartymemberFactory.CreatePartymemberInstance(PartymemberClass.Mage);
+        }
 
-            DungeonEntityFactory.CreateMonsterInstance(MonsterType.Goblin);
-            DungeonEntityFactory.CreateMonsterInstance(MonsterType.Goblin);
-            DungeonEntityFactory.CreateMonsterInstance(MonsterType.Ooze);
-            DungeonEntityFactory.CreateMonsterInstance(MonsterType.Ooze);
+        public void SetupItems()
+        {
+
         }
     }
 }

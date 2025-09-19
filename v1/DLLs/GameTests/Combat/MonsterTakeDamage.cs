@@ -14,14 +14,22 @@ namespace GameTests.Combat
         }
 
         [Fact]
+
         public void Actor_Should_Damage_Monster()
         {
             // Arrange
-            HeroFactory.CreateHeroInstance("ArkanerSchwertmeister");
-            PartymemberFactory.CreatePartymemberInstance(PartymemberClass.Warrior);
-            DungeonEntityFactory.CreateMonsterInstance(MonsterType.Goblin);
+            //HeroFactory.CreateHeroInstance("ArkanerSchwertmeister");
+            //PartymemberFactory.CreatePartymemberInstance(PartymemberClass.Warrior);
+            //DungeonEntityFactory.CreateMonsterInstance(MonsterType.Goblin);
+
+            SetupFightScenario();
 
             var partymember = GameContext.PartymemberManager.ActivePartymemberInstances[0];
+            foreach (var item in GameContext.DungeonManager.MonsterInstances)
+            {
+                Log(item.Data.MonsterType.ToString());
+            }
+
             var monster = GameContext.DungeonManager.MonsterInstances[0];
             var initialHealth = monster.CurrentHealth;
 

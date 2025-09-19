@@ -5,8 +5,6 @@ VisualStudioVersion = 17.14.36127.28
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameCore", "GameCore.csproj", "{E94C5CC2-162C-4DED-A127-73B4B2A65B8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameConsoleApp", "..\..\Runtime\GameConsoleApp\GameConsoleApp.csproj", "{5329C9ED-BD20-4334-9462-6938CA310650}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameData", "..\..\GameData\GameData\GameData.csproj", "{5674C9F1-A1A0-420A-A37E-BD6478F55B13}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameTests", "..\GameTests\GameTests.csproj", "{34033802-709E-4613-B0AE-CA1AB74BB68B}"
@@ -25,10 +23,6 @@ Global
 		{E94C5CC2-162C-4DED-A127-73B4B2A65B8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E94C5CC2-162C-4DED-A127-73B4B2A65B8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E94C5CC2-162C-4DED-A127-73B4B2A65B8A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5329C9ED-BD20-4334-9462-6938CA310650}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5329C9ED-BD20-4334-9462-6938CA310650}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5329C9ED-BD20-4334-9462-6938CA310650}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5329C9ED-BD20-4334-9462-6938CA310650}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5674C9F1-A1A0-420A-A37E-BD6478F55B13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5674C9F1-A1A0-420A-A37E-BD6478F55B13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5674C9F1-A1A0-420A-A37E-BD6478F55B13}.Release|Any CPU.ActiveCfg = Release|Any CPU
