@@ -6,6 +6,9 @@ using GameCore.Core.Abilities.AttackAbility;
 using GameCore.Runtime.Instances;
 using GameCore.Runtime.Events.Creation;
 using GameCore.Core;
+using GameCore.Core.Interfaces;
+using GameCore.Core.Abilities.LootAbility;
+using GameCore.Core.Abilities.RerollAbility;
 
 namespace GameCore.Runtime.Factories
 {
@@ -28,15 +31,31 @@ namespace GameCore.Runtime.Factories
 
             var attackAbilities = new List<IAttackAbility>();
 
-            foreach (var abilityId in partymemberData.AttackAbilityIds)
+            if (partymemberData.AttackAbilityIds != null)
             {
-                var newAbility = _abilityFactory.CreateAttackAbilityInstance(abilityId);
-                attackAbilities.Add(newAbility);
+                foreach (var abilityId in partymemberData.AttackAbilityIds)
+                {
+                    var newAbility = _abilityFactory.CreateAttackAbilityInstance(abilityId);
+                    attackAbilities.Add(newAbility);
+                }
             }
 
-            var lootAbility = _abilityFactory.CreateLootAbilityInstance(partymemberData.LootAbilityId);
+            ILootAbility lootAbility = null;
 
-            var partymemberInstance = new PartymemberInstance(partymemberData, attackAbilities, lootAbility, _gameContext); 
+            if (partymemberData.LootAbilityId != null)
+            {
+                lootAbility = _abilityFactory.CreateLootAbilityInstance(partymemberData.LootAbilityId);
+            }
+
+            IRerollAbility rerollAbility = null;
+
+            if (partymemberData.RerollAbilityId != null)
+            {
+                rerollAbility = _abilityFactory.CreateRerollAbility(partymemberData.RerollAbilityId);
+            }
+
+
+            var partymemberInstance = new PartymemberInstance(partymemberData, attackAbilities, lootAbility, rerollAbility, _gameContext); 
 
             _gameContext.EventManager.Publish(new PartymemberCreatedEvent(partymemberInstance));
         }

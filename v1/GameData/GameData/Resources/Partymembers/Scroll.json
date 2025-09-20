@@ -1,0 +1,6 @@
+﻿{
+  "Class": "Scroll",
+  "AttackAbilityIds": null,
+  "LootAbilityId": null,
+  "RerollAbilityId":  "RerollEntities"
+}

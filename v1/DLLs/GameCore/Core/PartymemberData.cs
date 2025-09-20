@@ -6,10 +6,12 @@
 
         public List<string> AttackAbilityIds { get; set; } = new List<string>();
         public string LootAbilityId { get; set; } 
+        public string RerollAbilityId { get; set; }
     }
 }
 public enum PartymemberClass
 {
     Warrior,
-    Mage
+    Mage,
+    Scroll
 }

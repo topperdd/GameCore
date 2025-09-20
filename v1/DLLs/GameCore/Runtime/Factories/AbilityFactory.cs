@@ -4,6 +4,7 @@ using GameCore.Contexts;
 using GameCore.Core.Abilities.AttackAbility;
 using GameCore.Core.Abilities.Effects;
 using GameCore.Core.Abilities.LootAbility;
+using GameCore.Core.Abilities.RerollAbility;
 using GameCore.Core.Interfaces;
 using GameCore.Runtime.Instances;
 using GameCore.Runtime.Instances.Abilities;
@@ -18,6 +19,7 @@ namespace GameCore.Runtime.Factories
         private GameContext _gameContext;
         private List<AttackAbilityData> _attackAbilityData = new List<AttackAbilityData>();
         private List<LootAbilityData> _lootAbilityData = new List<LootAbilityData>();
+        private List<RerollAbilityData> _rerollAbilityData = new List<RerollAbilityData>();
 
         private EffectFactory _effectFactory;
 
@@ -28,6 +30,7 @@ namespace GameCore.Runtime.Factories
 
             _attackAbilityData = LoadResources<AttackAbilityData>("AttackAbility");
             _lootAbilityData = LoadResources<LootAbilityData>("LootAbility");
+            _rerollAbilityData = LoadResources<RerollAbilityData>("RerollAbility");
         }
 
         public IAttackAbility CreateAttackAbilityInstance(string abilityId)
@@ -59,6 +62,21 @@ namespace GameCore.Runtime.Factories
 
         }
 
+        public IRerollAbility CreateRerollAbility(string abilityId)
+        {
+            if (abilityId != null)
+            {
+
+                var abilityData = _rerollAbilityData.FirstOrDefault(a => a.AbilityId == abilityId);
+
+                return new RerollAbilityInstance(abilityData);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
 
         private List<T> LoadResources<T>(string abilityType)
         {
@@ -74,6 +92,10 @@ namespace GameCore.Runtime.Factories
                 case "LootAbility":
                     path = Path.Combine("Resources", "Abilities", "LootAbility");
                     break;
+                case "RerollAbility":
+                    path = Path.Combine("Resources", "Abilities", "RerollAbility");
+                    break;
+
             }
 
             var jsonFiles = Directory.GetFiles(path, "*.json");
@@ -98,4 +120,3 @@ namespace GameCore.Runtime.Factories
     }
 }
 
- 

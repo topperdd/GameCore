@@ -63,7 +63,7 @@ namespace GameTests
                     type = types[rnd.Next(types.Length)];
                 }
 
-                Log("creating of type:" + type);
+                //Log("creating of type:" + type);
                 DungeonEntityFactory.CreateMonsterInstance(type);
             }
         }

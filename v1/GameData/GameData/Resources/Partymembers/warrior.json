@@ -1,5 +1,6 @@
 ﻿{
   "Class": "Warrior",
   "AttackAbilityIds": [ "AttackOneMonster", "AttackAllGoblins" ],
-  "LootAbilityId": "LootTreasureChest"
+  "LootAbilityId": "LootTreasureChest",
+  "RerollAbilityId": null
 }
