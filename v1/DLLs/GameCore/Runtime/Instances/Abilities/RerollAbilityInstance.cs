@@ -1,4 +1,6 @@
-﻿using GameCore.Core.Abilities.RerollAbility;
+﻿using GameCore.Contexts;
+using GameCore.Core.Abilities.Effects;
+using GameCore.Core.Abilities.RerollAbility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,16 +15,21 @@ namespace GameCore.Runtime.Instances.Abilities
 
         public RerollAbilityData Data { get; set; }
 
+        public IEffect Effect { get; set; }
 
-        public RerollAbilityInstance(RerollAbilityData data)
+
+        public RerollAbilityInstance(RerollAbilityData data, IEffect effectData)
         {
             Data = data;
             AbilityId = data.AbilityId;
+            Effect = effectData;
         }
 
         public void ExecuteAbility<T>(T context)
         {
-            
+            var effectContext = context as EffectContext;
+
+            Effect.ApplyEffect(effectContext);
         }
     }
 }

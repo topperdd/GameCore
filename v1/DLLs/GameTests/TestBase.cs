@@ -44,6 +44,7 @@ namespace GameTests
             SetupHero();
             SetupPartymembers();
             SetupMonsters(MonsterType.Any, 4);
+            SetupItems();
         }
 
         public void SetupMonsters(MonsterType monsterType, int amount)
@@ -76,12 +77,17 @@ namespace GameTests
         public void SetupPartymembers()
         {
             PartymemberFactory.CreatePartymemberInstance(PartymemberClass.Warrior);
+            PartymemberFactory.CreatePartymemberInstance(PartymemberClass.Warrior);
+            PartymemberFactory.CreatePartymemberInstance(PartymemberClass.Mage);
             PartymemberFactory.CreatePartymemberInstance(PartymemberClass.Mage);
         }
 
         public void SetupItems()
         {
-
+            DungeonEntityFactory.CreateLootInstance(LootType.Potion);
+            DungeonEntityFactory.CreateLootInstance(LootType.Potion);
+            DungeonEntityFactory.CreateLootInstance(LootType.TreasureChest);
+            DungeonEntityFactory.CreateLootInstance(LootType.TreasureChest);
         }
     }
 }

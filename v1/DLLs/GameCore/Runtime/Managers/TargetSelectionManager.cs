@@ -157,8 +157,12 @@ namespace GameCore.Runtime.Managers
         private void OnPartyMemberInstanceSelected(PartyMemberInstanceSelectedEvent e)
         {
             PartymemberInstance = e.PartymemberInstance;
-            Console.WriteLine($"PartymemberInstance selected: {e.PartymemberInstance.Data.Class.ToString()}");
-            Console.WriteLine("");
+
+            if (PartymemberInstance.Data.Class == PartymemberClass.Scroll)
+            {
+                //Fürs UI Targeting
+                _gameContext.EventManager.Publish(new ScrollSelectedEvent());
+            }
         }
     }
 }

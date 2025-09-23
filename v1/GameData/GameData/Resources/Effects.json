@@ -15,6 +15,10 @@
     "EffectId": "RevivePartymember"
   },
 
+  {
+    "EffectId": "RerollEntities"
+  },
+
 
   {
     "EffectId": "MageToWarriorAttackerConversion",

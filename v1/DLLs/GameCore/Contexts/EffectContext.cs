@@ -14,5 +14,7 @@ namespace GameCore.Contexts
         public IReviveable PartymemberToRevive { get; set; }
 
         public List<PartymemberInstance> PartymemberToConvert { get; set; }
+
+        public RerollContext RerollContext { get; set; }
     }
 }

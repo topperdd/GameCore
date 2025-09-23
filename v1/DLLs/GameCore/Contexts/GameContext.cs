@@ -6,13 +6,16 @@ namespace GameCore.Contexts
     public class GameContext
     {
         public EventManager EventManager { get; private set; }
-        public PartymemberManager PartymemberManager { get; private set; } 
+        public PartymemberManager PartymemberManager { get; private set; }
         public DungeonManager DungeonManager { get; private set; }
-        public InventoryManager InventoryManager { get; private set; } 
+        public InventoryManager InventoryManager { get; private set; }
         public HeroManager HeroManager { get; private set; }
         public HeroPassiveEffectsManager HeroPassiveEffectsManager { get; private set; }
+        public RerollManager RerollManager { get; private set; }
+        public TargetSelectionManager TargetSelectionManager { get; private set; }
 
-
+        public PartymemberFactory PartymemberFactory { get; private set; }
+        public DungeonEntityFactory DungeonEntityFactory { get; private set; }
         public AbilityFactory AbilityFactory { get; private set; }
 
         public GameContext()
@@ -23,7 +26,11 @@ namespace GameCore.Contexts
             InventoryManager = new InventoryManager(this);
             HeroManager = new HeroManager(this);
             HeroPassiveEffectsManager = new HeroPassiveEffectsManager(this);
+            RerollManager = new RerollManager(this);
+            TargetSelectionManager = new TargetSelectionManager(this);
 
+            PartymemberFactory = new PartymemberFactory(this);
+            DungeonEntityFactory = new DungeonEntityFactory(this);
             AbilityFactory = new AbilityFactory(this);
         }
     }

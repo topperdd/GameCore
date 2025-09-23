@@ -33,6 +33,7 @@ namespace GameCore.Runtime.Factories
                 "WarriorToMageAttackerConversion" => new AttackerConversionEffect((AttackerConversionEffectData)data),
                 "RemoveAllMonsters" => new RemoveAllMonstersEffect((RemoveAllMonstersData)data),
                 "RemoveAllLoot" => new RemoveAllLootEffect((RemoveAllLootData)data),
+                "RerollEntities" => new RerollEntitiesEffect((RerollEntitiesEffectData)data),
                 _ => throw new ArgumentException($"Unknown effect: {effectId}")
             };
         }
@@ -78,6 +79,7 @@ namespace GameCore.Runtime.Factories
                     "WarriorToMageAttackerConversion" => JsonSerializer.Deserialize<AttackerConversionEffectData>(element.GetRawText(), options),
                     "RemoveAllMonsters" => JsonSerializer.Deserialize<RemoveAllMonstersData>(element.GetRawText(), options),
                     "RemoveAllLoot" => JsonSerializer.Deserialize<RemoveAllLootData>(element.GetRawText(), options),
+                    "RerollEntities" => JsonSerializer.Deserialize<RerollEntitiesEffectData>(element.GetRawText(), options),
                     _ => throw new ArgumentException($"Unknown effect id: {type}")
                 };
 

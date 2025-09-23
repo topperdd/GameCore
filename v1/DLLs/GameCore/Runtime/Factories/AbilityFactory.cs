@@ -66,10 +66,11 @@ namespace GameCore.Runtime.Factories
         {
             if (abilityId != null)
             {
-
                 var abilityData = _rerollAbilityData.FirstOrDefault(a => a.AbilityId == abilityId);
 
-                return new RerollAbilityInstance(abilityData);
+                var effect = _effectFactory.CreateEffectInstance(abilityData.EffectId);
+                
+                return new RerollAbilityInstance(abilityData, effect);
             }
             else
             {
