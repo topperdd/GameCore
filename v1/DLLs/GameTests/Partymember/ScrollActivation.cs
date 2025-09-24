@@ -21,7 +21,7 @@ namespace GameTests.Partymember
             //- Erstelle Scrolls die als Partymember gelten
             SetupFightScenario();
 
-            PartymemberFactory.CreatePartymemberInstance(PartymemberClass.Scroll);
+            GameContext.PartymemberFactory.CreatePartymemberInstance(PartymemberClass.Scroll);
 
 
             // Act

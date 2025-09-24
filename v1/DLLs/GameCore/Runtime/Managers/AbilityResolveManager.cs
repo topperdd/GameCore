@@ -10,12 +10,12 @@ namespace GameCore.Runtime.Managers
     public class AbilityResolveManager
     {
         private GameContext _gameContext;
-        private CombatContext _combatContext;
+        private MonsterCombatContext _combatContext;
 
         public AbilityResolveManager(GameContext gameContext)
         {
             _gameContext = gameContext;
-            _gameContext.EventManager.Subscribe<CombatStartedEvent>(OnCombatStarted);
+            _gameContext.EventManager.Subscribe<MonsterCombatStartedEvent>(OnMonsterCombatStarted);
             _gameContext.EventManager.Subscribe<LootingStartedEvent>(OnLootingStarted);
         }
 
@@ -42,9 +42,9 @@ namespace GameCore.Runtime.Managers
             _gameContext.EventManager.Publish(new LootingFinishedEvent(lootCtx.LootInstance));
         }
 
-        private void OnCombatStarted(CombatStartedEvent e)
+        private void OnMonsterCombatStarted(MonsterCombatStartedEvent e)
         {
-            _combatContext = e.CombatContext;
+            _combatContext = e.MonsterCombatContext;
 
             ResolveAttackAbilityCombat();
         }

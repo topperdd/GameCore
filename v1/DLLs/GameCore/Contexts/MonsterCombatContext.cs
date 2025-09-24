@@ -4,7 +4,7 @@ using GameCore.Runtime.Instances;
 
 namespace GameCore.Contexts
 {
-    public class CombatContext
+    public class MonsterCombatContext
     {
         public IAttacker Attacker { get; set; } = null!;
         public List<IDamageable> MonsterInstances { get; set; } = null!;

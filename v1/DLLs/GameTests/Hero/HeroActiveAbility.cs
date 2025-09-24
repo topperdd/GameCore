@@ -18,17 +18,17 @@ namespace GameTests.Hero
         public void ActivateHeroActiveAbility()
         {
             // Arrange
-            HeroFactory.CreateHeroInstance("Kampfmagier");
+            GameContext.HeroFactory.CreateHeroInstance("Kampfmagier");
 
-            PartymemberFactory.CreatePartymemberInstance(PartymemberClass.Warrior);
+            GameContext.PartymemberFactory.CreatePartymemberInstance(PartymemberClass.Warrior);
 
-            DungeonEntityFactory.CreateMonsterInstance(MonsterType.Goblin);
-            DungeonEntityFactory.CreateMonsterInstance(MonsterType.Goblin);
-            DungeonEntityFactory.CreateMonsterInstance(MonsterType.Ooze);
-            DungeonEntityFactory.CreateMonsterInstance(MonsterType.Ooze);
+            GameContext.DungeonEntityFactory.CreateMonsterInstance(MonsterType.Goblin);
+            GameContext.DungeonEntityFactory.CreateMonsterInstance(MonsterType.Goblin);
+            GameContext.DungeonEntityFactory.CreateMonsterInstance(MonsterType.Ooze);
+            GameContext.DungeonEntityFactory.CreateMonsterInstance(MonsterType.Ooze);
 
-            DungeonEntityFactory.CreateLootInstance(LootType.Potion);
-            DungeonEntityFactory.CreateLootInstance(LootType.TreasureChest);
+            GameContext.DungeonEntityFactory.CreateLootInstance(LootType.Potion);
+            GameContext.DungeonEntityFactory.CreateLootInstance(LootType.TreasureChest);
 
 
             // Act

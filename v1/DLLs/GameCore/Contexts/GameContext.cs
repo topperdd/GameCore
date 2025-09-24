@@ -13,10 +13,15 @@ namespace GameCore.Contexts
         public HeroPassiveEffectsManager HeroPassiveEffectsManager { get; private set; }
         public RerollManager RerollManager { get; private set; }
         public TargetSelectionManager TargetSelectionManager { get; private set; }
+        public AbilityResolveManager AbilityResolveManager { get; private set; }
+        public DragonManager DragonManager { get; private set; }
 
+        public HeroFactory HeroFactory { get; private set; }
         public PartymemberFactory PartymemberFactory { get; private set; }
         public DungeonEntityFactory DungeonEntityFactory { get; private set; }
         public AbilityFactory AbilityFactory { get; private set; }
+
+        public ItemFactory ItemFactory { get; private set; } 
 
         public GameContext()
         {
@@ -28,10 +33,15 @@ namespace GameCore.Contexts
             HeroPassiveEffectsManager = new HeroPassiveEffectsManager(this);
             RerollManager = new RerollManager(this);
             TargetSelectionManager = new TargetSelectionManager(this);
+            AbilityResolveManager = new AbilityResolveManager(this);
+            DragonManager = new DragonManager(this);
 
+            HeroFactory = new HeroFactory(this);
             PartymemberFactory = new PartymemberFactory(this);
             DungeonEntityFactory = new DungeonEntityFactory(this);
             AbilityFactory = new AbilityFactory(this);
+
+            ItemFactory = new ItemFactory(this);
         }
     }
 }

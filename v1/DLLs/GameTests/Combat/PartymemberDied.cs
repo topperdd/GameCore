@@ -17,17 +17,17 @@ namespace GameTests.Combat
         public void SampleTest()
         {
             // Arrange
-            HeroFactory.CreateHeroInstance("ArkanerSchwertmeister");
+            GameContext.HeroFactory.CreateHeroInstance("ArkanerSchwertmeister");
 
-            PartymemberFactory.CreatePartymemberInstance(PartymemberClass.Warrior);
-            PartymemberFactory.CreatePartymemberInstance(PartymemberClass.Mage);
+            GameContext.PartymemberFactory.CreatePartymemberInstance(PartymemberClass.Warrior);
+            GameContext.PartymemberFactory.CreatePartymemberInstance(PartymemberClass.Mage);
 
             var partymember = GameContext.PartymemberManager.ActivePartymemberInstances[0];
 
-            DungeonEntityFactory.CreateMonsterInstance(MonsterType.Goblin);
-            DungeonEntityFactory.CreateMonsterInstance(MonsterType.Goblin);
-            DungeonEntityFactory.CreateMonsterInstance(MonsterType.Ooze);
-            DungeonEntityFactory.CreateMonsterInstance(MonsterType.Ooze);
+            GameContext.DungeonEntityFactory.CreateMonsterInstance(MonsterType.Goblin);
+            GameContext.DungeonEntityFactory.CreateMonsterInstance(MonsterType.Goblin);
+            GameContext.DungeonEntityFactory.CreateMonsterInstance(MonsterType.Ooze);
+            GameContext.DungeonEntityFactory.CreateMonsterInstance(MonsterType.Ooze);
             var monster = GameContext.DungeonManager.MonsterInstances.First();
 
             // Act

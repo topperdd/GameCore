@@ -18,9 +18,9 @@ namespace GameTests.Hero
         public void ActivateHeroPassiveAbility()
         {
             // Arrange
-            HeroFactory.CreateHeroInstance("ArkanerSchwertmeister");
+            GameContext.HeroFactory.CreateHeroInstance("ArkanerSchwertmeister");
 
-            PartymemberFactory.CreatePartymemberInstance(PartymemberClass.Warrior);
+            GameContext.PartymemberFactory.CreatePartymemberInstance(PartymemberClass.Warrior);
 
             // Act
             foreach (var effect in GameContext.HeroManager.HeroInstance.PassiveEffects)

@@ -1,0 +1,6 @@
+﻿{
+  "Class": "Cleric",
+  "AttackAbilityIds": [ "AttackOneMonster", "AttackAllSkeletons"],
+  "LootAbilityId": "LootTreasureChest",
+  "RerollAbilityId": null
+}

@@ -13,6 +13,7 @@ namespace GameCore.Runtime.Managers
     public class TargetSelectionManager
     {
         public PartymemberInstance PartymemberInstance { get; private set; } = null!;
+        public List<IAttacker> DragonFighter { get; private set; } = new List<IAttacker>();
         public HeroInstance HeroInstance { get; private set; } = null!;
         public List<MonsterInstance> MonsterInstances { get; private set; } = new List<MonsterInstance>();
 
@@ -27,6 +28,21 @@ namespace GameCore.Runtime.Managers
             _gameContext.EventManager.Subscribe<ItemInstanceSelectedEvent>(OnItemInstanceSelected);
             _gameContext.EventManager.Subscribe<LootInstanceSelectedEvent>(OnLootInstanceSelected);
             _gameContext.EventManager.Subscribe<HeroInstanceSelectedEvent>(OnHeroInstanceSelected);
+            _gameContext.EventManager.Subscribe<DragonFighterSelectedEvent>(OnDragonFighterSelected);
+            _gameContext.EventManager.Subscribe<DragonSelectedEvent>(OnDragonSelected);
+        }
+
+        private void OnDragonSelected(DragonSelectedEvent e)
+        {
+            if (DragonFighter.Count == e.DragonInstance.CurrentAttackerNeeded)
+            {
+                _gameContext.EventManager.Publish(new DragonFightStartedEvent(DragonFighter, e.DragonInstance));
+            }
+        }
+
+        private void OnDragonFighterSelected(DragonFighterSelectedEvent e)
+        {
+            DragonFighter.Add(e.DragonFighter);
         }
 
         private void OnHeroInstanceSelected(HeroInstanceSelectedEvent e)
@@ -123,14 +139,14 @@ namespace GameCore.Runtime.Managers
                 MonsterInstances = new List<MonsterInstance> { e.MonsterInstance };
             }
 
-            var combatContext = new CombatContext();
+            var monsterCombatContext = new MonsterCombatContext();
 
-            combatContext.MonsterInstances = MonsterInstances.OfType<IDamageable>().ToList();
+            monsterCombatContext.MonsterInstances = MonsterInstances.OfType<IDamageable>().ToList();
 
-            combatContext.Attacker = attacker;
-            combatContext.AttackAbility = attack;
+            monsterCombatContext.Attacker = attacker;
+            monsterCombatContext.AttackAbility = attack;
 
-            _gameContext.EventManager.Publish(new CombatStartedEvent(combatContext));
+            _gameContext.EventManager.Publish(new MonsterCombatStartedEvent(monsterCombatContext));
 
             Console.WriteLine("");
 

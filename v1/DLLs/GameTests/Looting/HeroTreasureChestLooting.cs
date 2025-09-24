@@ -18,8 +18,6 @@ namespace GameTests.Looting
             // Arrange
             SetupFightScenario();
 
-            DungeonEntityFactory.CreateLootInstance(LootType.TreasureChest);
-
             // Act
             GameContext.EventManager.Publish(new HeroInstanceSelectedEvent(GameContext.HeroManager.HeroInstance));
             GameContext.EventManager.Publish(new LootInstanceSelectedEvent(GameContext.DungeonManager.LootInstances[0]));

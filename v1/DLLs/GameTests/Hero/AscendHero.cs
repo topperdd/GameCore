@@ -16,7 +16,7 @@ namespace GameTests.Hero
         public void AscendHeroClass()
         {
             // Arrange
-            HeroFactory.CreateHeroInstance("ArkanerSchwertmeister");
+            GameContext.HeroFactory.CreateHeroInstance("ArkanerSchwertmeister");
 
             // Act
             GameContext.HeroManager.HeroInstance.GainXp(5);

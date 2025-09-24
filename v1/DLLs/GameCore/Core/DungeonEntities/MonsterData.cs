@@ -19,6 +19,7 @@ public enum MonsterType
 {
     Goblin,
     Ooze,
+    Skeleton,
     Any
 }
 
@@ -26,5 +27,5 @@ public enum DungeonEntityType
 {
     Monster,
     Loot,
-    //Dragon
+    Dragon
 }

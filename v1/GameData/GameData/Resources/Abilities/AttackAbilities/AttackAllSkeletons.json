@@ -1,0 +1,5 @@
+﻿{
+  "AbilityId": "AttackAllSkeletons",
+  "MonsterTypeToKill": "Skeleton",
+  "EffectIds": [ "Damage" ]
+}

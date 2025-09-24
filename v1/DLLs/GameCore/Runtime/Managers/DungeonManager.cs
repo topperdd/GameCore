@@ -12,6 +12,8 @@ namespace GameCore.Runtime.Managers
 
         public List<MonsterInstance> MonsterInstances { get; private set; } = new List<MonsterInstance>();
         public List<LootInstance> LootInstances { get; private set; } = new List<LootInstance>();
+        public int DragonCounter { get; set; } = 0;
+        public DragonInstance DragonInstance { get; set; }
 
         public DungeonManager(GameContext gameContext)
         {
@@ -26,6 +28,19 @@ namespace GameCore.Runtime.Managers
             _gameContext.EventManager.Subscribe<RemoveAllLootEvent>(OnRemoveAllLoot);
 
             _gameContext.EventManager.Subscribe<LootingFinishedEvent>(OnLootingFinished);
+
+            _gameContext.EventManager.Subscribe<DragonCreatedEvent>(OnDragonCreated);
+            _gameContext.EventManager.Subscribe<DragonKilledEvent>(OnDragonKilled);
+        }
+
+        private void OnDragonKilled(DragonKilledEvent e)
+        {
+            DragonInstance = null!;
+        }
+
+        private void OnDragonCreated(DragonCreatedEvent e)
+        {
+            DragonInstance = e.DragonInstance;
         }
 
         private void OnLootingFinished(LootingFinishedEvent e)

@@ -13,5 +13,6 @@ public enum PartymemberClass
 {
     Warrior,
     Mage,
+    Cleric,
     Scroll
 }

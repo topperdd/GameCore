@@ -17,24 +17,11 @@ namespace GameTests
         }
 
         protected GameContext GameContext { get; }
-        protected TargetSelectionManager TargetSelectionManager { get; }
-        protected AbilityResolveManager CombatResolveManager { get; }
-        protected PartymemberFactory PartymemberFactory { get; }
-        protected ItemFactory ItemFactory { get; }
-        protected HeroFactory HeroFactory { get; }
-        protected DungeonEntityFactory DungeonEntityFactory { get; }
 
         protected TestBase(ITestOutputHelper output)
         {
             GameContext = new GameContext();
-            TargetSelectionManager = new TargetSelectionManager(GameContext);
-            CombatResolveManager = new AbilityResolveManager(GameContext);
-
-            PartymemberFactory = new PartymemberFactory(GameContext);
-            ItemFactory = new ItemFactory(GameContext);
-            HeroFactory = new HeroFactory(GameContext);
-            DungeonEntityFactory = new DungeonEntityFactory(GameContext);
-
+           
             _output = output;
 
         }
@@ -65,29 +52,36 @@ namespace GameTests
                 }
 
                 //Log("creating of type:" + type);
-                DungeonEntityFactory.CreateMonsterInstance(type);
+                GameContext.DungeonEntityFactory.CreateMonsterInstance(type);
             }
         }
 
         public void SetupHero()
         {
-            HeroFactory.CreateHeroInstance("ArkanerSchwertmeister");
+            GameContext.HeroFactory.CreateHeroInstance("ArkanerSchwertmeister");
         }
 
         public void SetupPartymembers()
         {
-            PartymemberFactory.CreatePartymemberInstance(PartymemberClass.Warrior);
-            PartymemberFactory.CreatePartymemberInstance(PartymemberClass.Warrior);
-            PartymemberFactory.CreatePartymemberInstance(PartymemberClass.Mage);
-            PartymemberFactory.CreatePartymemberInstance(PartymemberClass.Mage);
+            GameContext.PartymemberFactory.CreatePartymemberInstance(PartymemberClass.Warrior);
+            GameContext.PartymemberFactory.CreatePartymemberInstance(PartymemberClass.Cleric);
         }
 
         public void SetupItems()
         {
-            DungeonEntityFactory.CreateLootInstance(LootType.Potion);
-            DungeonEntityFactory.CreateLootInstance(LootType.Potion);
-            DungeonEntityFactory.CreateLootInstance(LootType.TreasureChest);
-            DungeonEntityFactory.CreateLootInstance(LootType.TreasureChest);
+            GameContext.DungeonEntityFactory.CreateLootInstance(LootType.TreasureChest);
+        }
+
+        public void SetupDragonScenario()
+        {
+            SetupHero();
+            SetupPartymembers();
+            SetupDragon();
+        }
+
+        private void SetupDragon()
+        {
+            GameContext.DungeonEntityFactory.CreateDragonInstance();
         }
     }
 }

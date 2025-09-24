@@ -18,7 +18,7 @@ namespace GameTests.Items
         public void ItemUsage_DefaultTest()
         {
             // Arrange
-            ItemFactory.CreateItemInstance(ItemType.Potion);
+            GameContext.ItemFactory.CreateItemInstance(ItemType.Potion);
             Log("Item created");
 
             SetupFightScenario();

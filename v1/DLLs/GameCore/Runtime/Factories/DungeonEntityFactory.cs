@@ -11,11 +11,13 @@ namespace GameCore.Runtime.Factories
     {
         private List<MonsterData> _monsterDataList = new List<MonsterData>();
         private List<LootData> _lootDataList = new List<LootData>();
+        private List<DragonData> _dragonDataList = new List<DragonData>();
         private GameContext _gameContext;
         public DungeonEntityFactory(GameContext gameContext)
         {
             _monsterDataList = LoadResources<MonsterData>(DungeonEntityType.Monster);
             _lootDataList = LoadResources<LootData>(DungeonEntityType.Loot);
+            _dragonDataList = LoadResources<DragonData>(DungeonEntityType.Dragon);
 
             _gameContext = gameContext ?? throw new ArgumentNullException(nameof(gameContext));
         }
@@ -38,6 +40,13 @@ namespace GameCore.Runtime.Factories
             _gameContext.EventManager.Publish(new LootCreatedEvent(lootInstance));
         }
 
+        public void CreateDragonInstance()
+        {
+            var dragonDataToGenerate = _dragonDataList.FirstOrDefault();
+            var dragonInstance = new DragonInstance(dragonDataToGenerate, _gameContext);
+            _gameContext.EventManager.Publish(new DragonCreatedEvent(dragonInstance));
+        }
+
         private List<T> LoadResources<T>(DungeonEntityType dungeonEntityType)
         {
             var result = new List<T>();
@@ -51,6 +60,9 @@ namespace GameCore.Runtime.Factories
                     break;
                 case DungeonEntityType.Loot:
                     path = Path.Combine("Resources", "DungeonEntities", "Loot");
+                    break;
+                case DungeonEntityType.Dragon:
+                    path = Path.Combine("Resources", "DungeonEntities", "Dragon");
                     break;
             }
 

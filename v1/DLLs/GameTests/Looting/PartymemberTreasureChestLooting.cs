@@ -18,8 +18,7 @@ namespace GameTests.Looting
 
             // Arrange
             SetupFightScenario();
-            
-            DungeonEntityFactory.CreateLootInstance(LootType.Potion);
+
 
             // Act
             GameContext.EventManager.Publish(new PartyMemberInstanceSelectedEvent(GameContext.PartymemberManager.ActivePartymemberInstances[0]));
