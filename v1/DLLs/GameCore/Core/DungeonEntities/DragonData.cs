@@ -10,6 +10,7 @@ namespace GameCore.Core.DungeonEntities
     {
         DungeonEntityType EntityType { get; set; }
         public int AttackerNeeded { get; set; }
+        public int XpReward { get; set; }
 
     }
 }

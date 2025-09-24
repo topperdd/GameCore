@@ -1,5 +1,7 @@
 ﻿using GameCore.Contexts;
+using GameCore.Core.Interfaces;
 using GameCore.Runtime.Events;
+using GameCore.Runtime.Events.Combat;
 using GameCore.Runtime.Events.Creation;
 using GameCore.Runtime.Factories;
 using GameCore.Runtime.Instances;
@@ -20,24 +22,22 @@ namespace GameCore.Runtime.Managers
 
             _heroFactory = new HeroFactory(gameContext);
 
-            gameContext.EventManager.Subscribe<HeroCreatedEvent>(OnHeroCreated);
-            gameContext.EventManager.Subscribe<HeroActiveAbilityUsedEvent>(OnHeroActiveAbilityUsed);
+            _gameContext.EventManager.Subscribe<HeroCreatedEvent>(OnHeroCreated);
+            _gameContext.EventManager.Subscribe<HeroActiveAbilityUsedEvent>(OnHeroActiveAbilityUsed);
 
-            gameContext.EventManager.Subscribe<HeroGainedXpEvent>(OnHeroGainedXp);
+            _gameContext.EventManager.Subscribe<HeroGainedXpEvent>(OnHeroGainedXp);
+            
+            _gameContext.EventManager.Subscribe<DragonKilledEvent>(OnDragonKilled);
+        }
+
+        private void OnDragonKilled(DragonKilledEvent e)
+        {
+            GainXp(e.DragonWorthXp);
         }
 
         private void OnHeroGainedXp(HeroGainedXpEvent e)
         {
-            if (HeroInstance.CurrentXp >= 5)
-            {
-                AscendHero();
-
-                _gameContext.EventManager.Publish(new HeroAscendedEvent(HeroInstance));
-            }
-            else
-            {
-                Console.WriteLine($"Hero gained {e.XpAmount} XP. Current XP: {HeroInstance.CurrentXp}");
-            }
+            GainXp(e.XpAmount);
         }
 
         public void AscendHero()
@@ -59,6 +59,21 @@ namespace GameCore.Runtime.Managers
         private void OnHeroCreated(HeroCreatedEvent e)
         {
             HeroInstance = e.HeroInstance;
+        }
+
+        private void GainXp(int amount)
+        {
+            if (HeroInstance.CurrentXp >= 5)
+            {
+                AscendHero();
+
+                _gameContext.EventManager.Publish(new HeroAscendedEvent(HeroInstance));
+            }
+            else
+            {
+                var xpGainer = HeroInstance as IXpGainer;
+                xpGainer.GainXp(amount);
+            }
         }
     }
 }

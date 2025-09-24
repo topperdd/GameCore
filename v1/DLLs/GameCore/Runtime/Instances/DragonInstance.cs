@@ -14,13 +14,15 @@ namespace GameCore.Runtime.Instances
 
         public DragonData Data { get; set; }
 
-        public int CurrentAttackerNeeded { get; set; } 
+        public int CurrentAttackerNeeded { get; set; }
+        public int XpReward { get; set; }
 
         public DragonInstance(DragonData data, GameContext gameContext)
         {
             _gameContext = gameContext ?? throw new ArgumentNullException(nameof(gameContext));
             Data = data ?? throw new ArgumentNullException(nameof(data));
             CurrentAttackerNeeded = Data.AttackerNeeded;
+            XpReward = Data.XpReward;
         }
     }
 }

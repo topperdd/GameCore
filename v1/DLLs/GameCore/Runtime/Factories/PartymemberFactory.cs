@@ -25,6 +25,26 @@ namespace GameCore.Runtime.Factories
             _abilityFactory = new AbilityFactory(_gameContext);
         }
 
+        public void CreateRandomPartymemberGroup(int amountOfPartymembers)
+        {
+            var rng = new Random();
+
+            for (int i = 0; i < amountOfPartymembers; i++)
+            {
+                var result = rng.Next(1, 7);
+
+                switch (result)
+                {
+                    case 1: CreatePartymemberInstance(PartymemberClass.Warrior); break;
+                    case 2: CreatePartymemberInstance(PartymemberClass.Mage); break;
+                    case 3: CreatePartymemberInstance(PartymemberClass.Cleric); break;
+                    case 4: break;
+                    case 5: break;
+                    case 6: CreatePartymemberInstance(PartymemberClass.Scroll); break;
+                }
+            }
+        }
+
         public void CreatePartymemberInstance(PartymemberClass partymemberClass)
         {
             var partymemberData = _partymemberDataList.FirstOrDefault(p => p.Class == partymemberClass);

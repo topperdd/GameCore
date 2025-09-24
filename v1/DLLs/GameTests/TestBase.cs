@@ -16,12 +16,32 @@ namespace GameTests
             _output.WriteLine(message);
         }
 
+        protected void LogList<T>(IEnumerable<T> list)
+        {
+            foreach (var item in list)
+            {
+                switch (item)
+                {
+                    case PartymemberInstance partymember:
+                        _output.WriteLine("Partymember: " + partymember.Data.Class.ToString());
+                        break;
+
+                    case MonsterInstance monster:
+                        _output.WriteLine("Monster: " + monster.Data.MonsterType.ToString());
+                        break;
+
+                    case LootInstance loot:
+                        _output.WriteLine("Loot: " + loot.Data.LootType.ToString());
+                        break;
+                }
+            }
+        }
         protected GameContext GameContext { get; }
 
         protected TestBase(ITestOutputHelper output)
         {
             GameContext = new GameContext();
-           
+
             _output = output;
 
         }
@@ -64,6 +84,7 @@ namespace GameTests
         public void SetupPartymembers()
         {
             GameContext.PartymemberFactory.CreatePartymemberInstance(PartymemberClass.Warrior);
+            GameContext.PartymemberFactory.CreatePartymemberInstance(PartymemberClass.Mage);
             GameContext.PartymemberFactory.CreatePartymemberInstance(PartymemberClass.Cleric);
         }
 

@@ -1,7 +1,9 @@
 ﻿using GameCore.Contexts;
+using GameCore.Runtime.Events;
 using GameCore.Runtime.Events.Combat;
 using GameCore.Runtime.Events.Selection;
 using GameCore.Runtime.Factories;
+using GameTests.Hero;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -19,6 +21,7 @@ namespace GameTests.Combat
 
             // Arrange
             SetupDragonScenario();
+            var heroXpBeforeFight = GameContext.HeroManager.HeroInstance.CurrentXp;
 
 
             // Act
@@ -32,13 +35,12 @@ namespace GameTests.Combat
             //handle drachenkampf
             GameContext.EventManager.Publish(new DragonSelectedEvent(GameContext.DungeonManager.DragonInstance));
 
+            Log("Xp gained: " + GameContext.HeroManager.HeroInstance.CurrentXp.ToString());
+
 
             // Assert
-            //drache besiegt
-            //xp erhalten
-            //loot erhalten
-            var test = false;
-            Assert.True(test);
+            Assert.True(GameContext.DungeonManager.DragonInstance == null);
+            Assert.True(GameContext.HeroManager.HeroInstance.CurrentXp > heroXpBeforeFight);
         }
     }
 }

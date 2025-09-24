@@ -47,7 +47,7 @@ namespace GameCore.Runtime.Managers
 
             if (attacks.Count == dragonInstance.CurrentAttackerNeeded)
             {
-                _gameContext.EventManager.Publish(new DragonKilledEvent(dragonFighters));
+                _gameContext.EventManager.Publish(new DragonKilledEvent(dragonFighters, dragonInstance.XpReward));
             }
             else
             {

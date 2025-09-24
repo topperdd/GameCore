@@ -38,7 +38,6 @@ namespace GameCore.Runtime.Instances
             if (CurrentXp >= 5)
             {
                 _gameContext.HeroManager.AscendHero();
-
             }
         }
     }

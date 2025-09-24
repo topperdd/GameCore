@@ -22,6 +22,26 @@ namespace GameCore.Runtime.Factories
             _gameContext = gameContext ?? throw new ArgumentNullException(nameof(gameContext));
         }
 
+        public void CreateRandomDungeon(int amountOfDungeonEntities)
+        {
+            var rng = new Random();
+
+            for (int i = 0; i < amountOfDungeonEntities; i++)
+            {
+                var result = rng.Next(1, 7);
+
+                switch (result)
+                {
+                    case 1: CreateMonsterInstance(MonsterType.Goblin); break;
+                    case 2: CreateMonsterInstance(MonsterType.Ooze); break;
+                    case 3: CreateMonsterInstance(MonsterType.Skeleton); break;
+                    case 4: CreateLootInstance(LootType.Potion); break;
+                    case 5: CreateLootInstance(LootType.TreasureChest); break;
+                    case 6: _gameContext.EventManager.Publish(new DragonRolledEvent()); break;
+                }
+            }
+        }
+
         public void CreateMonsterInstance(MonsterType monsterType)
         {
             var monsterDataToGenerate = _monsterDataList.Where(q => q.MonsterType == monsterType).FirstOrDefault();

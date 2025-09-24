@@ -29,8 +29,19 @@ namespace GameCore.Runtime.Managers
 
             _gameContext.EventManager.Subscribe<LootingFinishedEvent>(OnLootingFinished);
 
+            _gameContext.EventManager.Subscribe<DragonRolledEvent>(OnDragonRolled);
             _gameContext.EventManager.Subscribe<DragonCreatedEvent>(OnDragonCreated);
             _gameContext.EventManager.Subscribe<DragonKilledEvent>(OnDragonKilled);
+        }
+
+        private void OnDragonRolled(DragonRolledEvent e)
+        {
+            DragonCounter++;
+
+            if (DragonCounter == 3)
+            {
+                _gameContext.DungeonEntityFactory.CreateDragonInstance();
+            }
         }
 
         private void OnDragonKilled(DragonKilledEvent e)
