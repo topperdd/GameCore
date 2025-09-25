@@ -1,0 +1,22 @@
+﻿[
+  {
+    "LootTableId": "PotionLootTable",
+    "Items": [
+      {
+        "ItemId": "Potion",
+        "Quantity": 1
+      }
+    ]
+  },
+
+  {
+    "LootTableId": "TreasureChestLootTable",
+    "Items": [
+      {
+        "ItemId": "Potion",
+        "Quantity": 3
+      }
+    ]
+  }
+
+]

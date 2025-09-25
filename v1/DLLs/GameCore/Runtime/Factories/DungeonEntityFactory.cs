@@ -1,5 +1,6 @@
 ﻿using GameCore.Contexts;
 using GameCore.Core.DungeonEntities;
+using GameCore.Core.DungeonEntities.Loot;
 using GameCore.Runtime.Events.Creation;
 using GameCore.Runtime.Instances;
 using System.Text.Json;
@@ -12,6 +13,7 @@ namespace GameCore.Runtime.Factories
         private List<MonsterData> _monsterDataList = new List<MonsterData>();
         private List<LootData> _lootDataList = new List<LootData>();
         private List<DragonData> _dragonDataList = new List<DragonData>();
+
         private GameContext _gameContext;
         public DungeonEntityFactory(GameContext gameContext)
         {

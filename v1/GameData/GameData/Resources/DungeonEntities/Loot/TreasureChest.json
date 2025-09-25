@@ -1,5 +1,6 @@
 ﻿{
   "EntityType": "Loot",
   "LootType": "TreasureChest",
-  "ItemType": ["Potion"]
+  "ItemType": [ "Potion" ],
+  "LootTableId": "TreasureChestLootTable"
 }

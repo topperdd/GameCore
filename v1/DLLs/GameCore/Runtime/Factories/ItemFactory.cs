@@ -1,6 +1,7 @@
 ﻿using GameCore.Contexts;
 using GameCore.Core;
 using GameCore.Core.Abilities.Effects;
+using GameCore.Core.DungeonEntities.Loot;
 using GameCore.Runtime.Events.Creation;
 using GameCore.Runtime.Instances;
 using System.Text.Json;
@@ -21,9 +22,9 @@ namespace GameCore.Runtime.Factories
             _effectFactory = new EffectFactory(_gameContext);
         }
 
-        public void CreateItemInstance(ItemType itemType)
+        public void CreateItemInstance(LootEntryData lootEntryData)
         {
-            var itemData = _itemDataList.FirstOrDefault(a => a.ItemType == itemType);
+            var itemData = _itemDataList.FirstOrDefault(a => a.ItemType.ToString() == lootEntryData.ItemId);
 
             var effects = new List<IEffect>();
 

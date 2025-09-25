@@ -30,7 +30,7 @@ namespace GameCore.Runtime.Managers
 
         private void OnItemLooted(ItemLootedEvent e)
         {
-            var itemInLoot = e.LootInstance.Data.ItemType;
+            var itemInLoot = e.LootInstance.ItemsInLoot;
 
             foreach (var item in itemInLoot)
             {

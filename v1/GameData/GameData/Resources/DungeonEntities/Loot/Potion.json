@@ -1,5 +1,6 @@
 ﻿{
   "EntityType": "Loot",
   "LootType": "Potion",
-  "ItemType": ["Potion"]
+  "ItemType": [ "Potion" ],
+  "LootTableId": "PotionLootTable"
 }

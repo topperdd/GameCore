@@ -1,4 +1,5 @@
 ﻿using GameCore.Contexts;
+using GameCore.Core.DungeonEntities.Loot;
 using GameCore.Runtime.Events.Combat;
 using GameCore.Runtime.Events.Selection;
 using GameCore.Runtime.Factories;
@@ -18,7 +19,13 @@ namespace GameTests.Items
         public void ItemUsage_DefaultTest()
         {
             // Arrange
-            GameContext.ItemFactory.CreateItemInstance(ItemType.Potion);
+            var entry = new LootEntryData
+            {
+                ItemId = ItemType.Potion.ToString(),
+                Quantity = 1,
+            };
+
+            GameContext.ItemFactory.CreateItemInstance(entry);
             Log("Item created");
 
             SetupFightScenario();

@@ -20,6 +20,7 @@ namespace GameCore.Contexts
         public PartymemberFactory PartymemberFactory { get; private set; }
         public DungeonEntityFactory DungeonEntityFactory { get; private set; }
         public AbilityFactory AbilityFactory { get; private set; }
+        public LootTableFactory LootFactory { get; private set; }
 
         public ItemFactory ItemFactory { get; private set; } 
 
@@ -40,6 +41,7 @@ namespace GameCore.Contexts
             PartymemberFactory = new PartymemberFactory(this);
             DungeonEntityFactory = new DungeonEntityFactory(this);
             AbilityFactory = new AbilityFactory(this);
+            LootFactory = new LootTableFactory(this);
 
             ItemFactory = new ItemFactory(this);
         }
